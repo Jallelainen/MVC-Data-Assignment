@@ -12,7 +12,7 @@ namespace MVC_Data_Assignment.Models.Data
 
         public People Create(string name, string phoneNum, string city)
         {
-            People people = new People() { Id = ++idCounter, Name = name, PhoneNum = phoneNum, City = city };
+            People people = new People(++idCounter, name, phoneNum, city);
             peopleList.Add(people);
             return people;
         }

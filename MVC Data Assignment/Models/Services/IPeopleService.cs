@@ -12,5 +12,6 @@ namespace MVC_Data_Assignment.Models.Services
         People FindBy(int id);
         People Edit(int id, CreatePersonViewModel people);
         bool Remove(int id);
+        List<People> Search(string search);
     }
 }

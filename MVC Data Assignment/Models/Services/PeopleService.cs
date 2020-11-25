@@ -22,7 +22,7 @@ namespace MVC_Data_Assignment.Models.Services
 
         public People Edit(int id, CreatePersonViewModel people)
         {
-            People editedPeople = new People() { Id = id, Name = people.Name, PhoneNum = people.PhoneNum, City = people.City };
+            People editedPeople = new People( id, people.Name, people.PhoneNum, people.City);
             return _peopleRepo.Update(editedPeople);
         }
 
@@ -44,6 +44,22 @@ namespace MVC_Data_Assignment.Models.Services
                 return _peopleRepo.Delete(people);
             }
 
+        }
+
+        public List<People> Search(string search)
+        {
+            List<People> filterList = new List<People>();
+
+            foreach (var item in All())
+            {
+
+                if (item.Name.ToUpper().Contains(search.ToUpper()) || item.PhoneNum.Contains(search) || item.City.ToUpper().Contains(search.ToUpper()))
+                {
+                    filterList.Add(item);
+                }
+            }
+
+            return filterList;
         }
     }
 }
