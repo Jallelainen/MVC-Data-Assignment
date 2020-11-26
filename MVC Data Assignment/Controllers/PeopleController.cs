@@ -44,16 +44,17 @@ namespace MVC_Data_Assignment.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         public IActionResult Create(PeoplesViewModel peoplesViewModel)
         {
+            peoplesViewModel.peopleList = _peopleService.All();
+
             if (ModelState.IsValid)
             {
                 _peopleService.Add(peoplesViewModel.CreatePerson);
                 return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return View("Index", peoplesViewModel);
         }
 
     }
