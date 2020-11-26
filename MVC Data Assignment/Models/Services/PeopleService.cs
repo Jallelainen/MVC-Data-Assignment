@@ -10,30 +10,30 @@ namespace MVC_Data_Assignment.Models.Services
     {
         IPeopleRepo _peopleRepo = new InMemoryPeopleRepo();
 
-        public People Add(CreatePersonViewModel createPersonViewModel)
+        public Person Add(CreatePersonViewModel createPersonViewModel)
         {
             return _peopleRepo.Create(createPersonViewModel.Name, createPersonViewModel.PhoneNum, createPersonViewModel.City);
         }
 
-        public List<People> All()
+        public List<Person> All()
         {
             return _peopleRepo.Read();
         }
 
-        public People Edit(int id, CreatePersonViewModel people)
+        public Person Edit(int id, CreatePersonViewModel people)
         {
-            People editedPeople = new People( id, people.Name, people.PhoneNum, people.City);
+            Person editedPeople = new Person( id, people.Name, people.PhoneNum, people.City);
             return _peopleRepo.Update(editedPeople);
         }
 
-        public People FindBy(int id)
+        public Person FindBy(int id)
         {
             return _peopleRepo.Read(id);
         }
 
         public bool Remove(int id)
         {
-            People people = _peopleRepo.Read(id);
+            Person people = _peopleRepo.Read(id);
 
             if (people == null)
             {
@@ -46,9 +46,9 @@ namespace MVC_Data_Assignment.Models.Services
 
         }
 
-        public List<People> Search(string search)
+        public List<Person> Search(string search)
         {
-            List<People> filterList = new List<People>();
+            List<Person> filterList = new List<Person>();
 
             foreach (var item in All())
             {

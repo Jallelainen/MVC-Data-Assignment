@@ -7,29 +7,29 @@ namespace MVC_Data_Assignment.Models.Data
 {
     public class InMemoryPeopleRepo : IPeopleRepo
     {
-        private static List<People> peopleList = new List<People>();
+        private static List<Person> peopleList = new List<Person>();
         private static int idCounter = 0;
 
-        public People Create(string name, string phoneNum, string city)
+        public Person Create(string name, string phoneNum, string city)
         {
-            People people = new People(++idCounter, name, phoneNum, city);
+            Person people = new Person(++idCounter, name, phoneNum, city);
             peopleList.Add(people);
             return people;
         }
 
-        public bool Delete(People people)
+        public bool Delete(Person people)
         {
             return peopleList.Remove(people);
         }
 
-        public List<People> Read()
+        public List<Person> Read()
         {
             return peopleList;
         }
 
-        public People Read(int id)
+        public Person Read(int id)
         {
-            foreach (People people in peopleList)
+            foreach (Person people in peopleList)
             {
                 if (people.Id == id)
                 {
@@ -40,9 +40,9 @@ namespace MVC_Data_Assignment.Models.Data
             return null;
         }
 
-        public People Update(People people)
+        public Person Update(Person people)
         {
-            People originalPeople = Read(people.Id);
+            Person originalPeople = Read(people.Id);
 
             if (originalPeople == null)
             {

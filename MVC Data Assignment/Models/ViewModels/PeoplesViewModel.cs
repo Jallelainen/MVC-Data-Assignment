@@ -10,6 +10,6 @@ namespace MVC_Data_Assignment.Models.ViewModels
     {
         public string Search { get; set; }
         public CreatePersonViewModel CreatePerson { get; set; }
-        public List<People> peopleList { get; set; }
+        public List<Person> peopleList { get; set; }
     }
 }

@@ -7,11 +7,11 @@ namespace MVC_Data_Assignment.Models.Services
 {
     public interface IPeopleService
     {
-        People Add(CreatePersonViewModel createPersonViewModel);
-        List<People> All();
-        People FindBy(int id);
-        People Edit(int id, CreatePersonViewModel people);
+        Person Add(CreatePersonViewModel createPersonViewModel);
+        List<Person> All();
+        Person FindBy(int id);
+        Person Edit(int id, CreatePersonViewModel people);
         bool Remove(int id);
-        List<People> Search(string search);
+        List<Person> Search(string search);
     }
 }
