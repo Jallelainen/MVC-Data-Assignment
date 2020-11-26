@@ -22,12 +22,6 @@ namespace MVC_Data_Assignment.Controllers
             return View(peoplesViewModel);
         }
 
-        public IActionResult Delete(int id)
-        {
-            _peopleService.Remove(id);
-            return RedirectToAction(nameof(Index));
-        }
-
         [HttpPost]
         public IActionResult Index(PeoplesViewModel peoplesViewModel)
         {
@@ -44,23 +38,22 @@ namespace MVC_Data_Assignment.Controllers
             }  
         }
 
-
-        [HttpGet]
-        public IActionResult Create()
+        public IActionResult Delete(int id)
         {
-            return View();
+            _peopleService.Remove(id);
+            return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        public IActionResult Create(CreatePersonViewModel personViewModel)
+
+        public IActionResult Create(PeoplesViewModel peoplesViewModel)
         {
             if (ModelState.IsValid)
             {
-                _peopleService.Add(personViewModel);
+                _peopleService.Add(peoplesViewModel.CreatePerson);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(personViewModel);
+            return RedirectToAction(nameof(Index));
         }
 
     }

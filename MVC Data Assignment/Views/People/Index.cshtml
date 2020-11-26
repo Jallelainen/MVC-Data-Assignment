@@ -3,9 +3,26 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h3>People List Index</h3>
 
 <a class="btn btn-primary" asp-action="Create">Add Person to list</a>
+<h1>Create Person</h1>
+
+<form asp-action="Create">
+    <label asp-for="@Model.CreatePerson.Name"></label>
+    <input asp-for="@Model.CreatePerson.Name" />
+    <span asp-validation-for="@Model.CreatePerson.Name"></span>
+    <br />
+    <label asp-for="@Model.CreatePerson.PhoneNum"></label>
+    <input asp-for="@Model.CreatePerson.PhoneNum" />
+    <span asp-validation-for="@Model.CreatePerson.PhoneNum"></span>
+    <br />
+    <label asp-for="@Model.CreatePerson.City"></label>
+    <input asp-for="@Model.CreatePerson.City" />
+    <span asp-validation-for="@Model.CreatePerson.City"></span>
+    <br />
+    <input type="submit" value="Create" />
+</form>
 
 @*<div class="row">
         <div class="col-12">
@@ -43,7 +60,7 @@
         <form asp-action="Index" method="post">
             <h4>Search</h4>
             <input class="mr-sm-1" type="search" name="search" />
-            <button class="btn btn-success btn-sm" id="searchbtn" type="submit" >Search</button>
+            <button class="btn btn-success btn-sm" id="searchbtn" type="submit">Search</button>
         </form>
     </div>
 </div>
