@@ -3,9 +3,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h3>People List Index</h3>
+<h1>People List Index</h1>
 
+<br />
 <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#CreatePerson">Add Person to list</button>
+<br />
 <div id="CreatePerson" class="collapse">
     <h3>Create Person</h3>
     <form asp-action="Create">
@@ -27,7 +29,7 @@
 
 
 
-
+<br />
 <div class="row">
     <div class="col-12">
         <form asp-action="Index" method="post">
@@ -35,38 +37,37 @@
             <div class="input-group mb-3">
                 <input class="form-control col-3" type="search" placeholder="Search" name="search" />
                 <div class="input-group-append">
-                    <button class="btn btn-success btn-sm" id="searchbtn" type="submit">Search</button>
+                    <button class="btn btn-success btn-sm" type="submit">Search</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<table class="table-striped">
-    <tr>
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div class="col">
+                <h4>Name</h4>
+            </div>
+            <div class="col">
+                <h4>Phone Number</h4>
+            </div>
+            <div class="col">
+                <h4>City</h4>
+            </div>
+            <div class="col">
 
-        <td><b>Name</b></td>
-        <td><b>Phone</b></td>
-        <td><b>City</b></td>
-        <td></td>
-
-    </tr>
-
-    @{
-        if (Model.peopleList != null)
+            </div>
+        </div>
+        @foreach (var item in Model.peopleList)
         {
-
-            @foreach (var item in Model.peopleList)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.PhoneNum</td>
-                    <td>@item.City</td>
-                    <td>
-                        <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Remove</a>
-                    </td>
-                </tr>
-            }
+            <div class="row">
+                <partial name="_PeopleTablePartial" model="item" />
+                <div class="col">
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Remove</a>
+                </div>
+            </div>
         }
-    }
-</table>
+    </div>
+</div>

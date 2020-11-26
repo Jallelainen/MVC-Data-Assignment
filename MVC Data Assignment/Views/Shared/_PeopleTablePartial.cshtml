@@ -1,35 +1,12 @@
-﻿<div class="row">
-        <div class="col-12">
-            <div class="row">
-                <div class="col">
-                    <h4>Name</h4>
-                </div>
-                <div class="col">
-                    <h4>Phone Number</h4>
-                </div>
-                <div class="col">
-                    <h4>City</h4>
-                </div>
-                <div class="col">
-                    
-                </div>
-            </div>
-            @foreach (var item in Model)
-            {
-                <div class="row">
-                    <div class="col">
-                        <p>@item.Name</p>
-                    </div>
-                    <div class="col">
-                        <p>@item.PhoneNum</p>
-                    </div>
-                    <div class="col">
-                        <p>@item.City</p>
-                    </div>
-                    <div class="col">
-                        <a class="btn btn-outline-danger btn-lg" asp-action="Delete" asp-route-id="@item.Id">Remove</a>
-                    </div>
-                </div>
-             }
-        </div>
-    </div>
+﻿@model Person
+
+<div class="col">
+    <p>@Model.Name</p>
+</div>
+<div class="col">
+    <p>@Model.PhoneNum</p>
+</div>
+<div class="col">
+    <p>@Model.City</p>
+</div>
+
