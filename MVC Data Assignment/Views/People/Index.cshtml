@@ -1,4 +1,4 @@
-﻿@model List<People>
+﻿@model PeoplesViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -43,7 +43,7 @@
         <form asp-action="Index" method="post">
             <h4>Search</h4>
             <input class="mr-sm-1" type="search" name="search" />
-            <button class="btn btn-success btn-sm" id="searchbtn" type="submit" value="">Search</button>
+            <button class="btn btn-success btn-sm" id="searchbtn" type="submit" >Search</button>
         </form>
     </div>
 </div>
@@ -57,18 +57,22 @@
         <td></td>
 
     </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.PhoneNum</td>
-            <td>@item.City</td>
-            <td>
-                <form asp-action="Index" method="delete">
-                    <button class="btn btn-danger btn-sm" for="@item.Id">Remove</button>
-                    <span asp-validation-for="@item.Id"></span>
-                </form>
-            </td>
-        </tr>
+
+    @{
+        if (Model.peopleList != null)
+        {
+
+            @foreach (var item in Model.peopleList)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.PhoneNum</td>
+                    <td>@item.City</td>
+                    <td>
+                        <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Remove</a>
+                    </td>
+                </tr>
+            }
+        }
     }
 </table>

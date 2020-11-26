@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MVC_Data_Assignment.Models;
 using MVC_Data_Assignment.Models.Services;
+using MVC_Data_Assignment.Models.ViewModels;
 
 namespace MVC_Data_Assignment.Controllers
 {
@@ -15,35 +16,34 @@ namespace MVC_Data_Assignment.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_peopleService.All());
+            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
+            peoplesViewModel.peopleList = _peopleService.All();
+
+            return View(peoplesViewModel);
         }
 
-        [HttpDelete]
-        public IActionResult Index(int id)
+        public IActionResult Delete(int id)
         {
             _peopleService.Remove(id);
-            return View(_peopleService.All());
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
-        public IActionResult Index(string search)
+        public IActionResult Index(PeoplesViewModel peoplesViewModel)
         {
-            if (search != null)
+            peoplesViewModel.peopleList = _peopleService.All();
+
+            if (peoplesViewModel.Search != null)
             {
-                List<People> filterList = _peopleService.Search(search);
-                return View(filterList);
+                peoplesViewModel.peopleList = _peopleService.Search(peoplesViewModel.Search);
+                return View(peoplesViewModel);
             }
             else
             {
-                return View(_peopleService.All());
+                return View(peoplesViewModel);
             }  
         }
 
-        [HttpPost]
-        public IActionResult Search()
-        {
-            return View();
-        }
 
         [HttpGet]
         public IActionResult Create()
