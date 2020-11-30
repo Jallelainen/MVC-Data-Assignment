@@ -12,7 +12,14 @@
             <h5>Message</h5>
         </div>
         <div class="toast-body">
-            <p>@Model.Msg</p>
+            @if (Model.Msg.Contains("Error"))
+            {
+                <p style="color: red">@Model.Msg</p>
+            }
+            else
+            {
+                <p style="color: green">@Model.Msg</p>
+            }
         </div>
     </div>
 }
@@ -67,14 +74,15 @@
                 <h4 class="border border-top-0 border-right-0">City</h4>
             </div>
             <div class="col">
-
+                <h4 class="border border-top-0 border-right-0">Action</h4>
             </div>
         </div>
         @foreach (var item in Model.peopleList)
         {
             <div class="row">
-                <partial name="_PeopleTablePartial" model="item" />
+                <partial name="_ListItemPartial" model="item" />
                 <div class="col">
+                    <a class="btn btn-outline-info" asp-action="Delete" asp-route-id="@item.Id">Edit</a>
                     <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Remove</a>
                 </div>
             </div>
