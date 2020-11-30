@@ -5,6 +5,18 @@
 
 <h1>People List Index</h1>
 
+@if (@Model.Msg != null)
+{
+    <div class="toast">
+        <div class="toast-header">
+            <h5>Message</h5>
+        </div>
+        <div class="toast-body">
+            <p>@Model.Msg</p>
+        </div>
+    </div>
+}
+
 <br />
 <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#CreatePerson">Add Person to List</button>
 <br />
@@ -27,8 +39,6 @@
     </form>
 </div>
 
-
-
 <br />
 <div class="row">
     <div class="col-12">
@@ -37,6 +47,7 @@
                 <input class="form-control col-3" type="search" placeholder="Search the list..." name="search" />
                 <div class="input-group-append">
                     <button class="btn btn-success btn-sm" type="submit">Search</button>
+                    <button class="btn btn-danger btn-sm" asp-action="Index" method="get">Clear</button>
                 </div>
             </div>
         </form>

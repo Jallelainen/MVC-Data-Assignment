@@ -35,13 +35,19 @@ namespace MVC_Data_Assignment.Controllers
             else
             {
                 return View(peoplesViewModel);
-            }  
+            }
         }
 
         public IActionResult Delete(int id)
         {
-            _peopleService.Remove(id);
-            return RedirectToAction(nameof(Index));
+            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
+
+            if (_peopleService.Remove(id))
+            {
+                peoplesViewModel.Msg = "Person Successfully Removed";
+                peoplesViewModel.peopleList = _peopleService.All();
+            }
+            return View("Index", peoplesViewModel);
         }
 
         public IActionResult Create(PeoplesViewModel peoplesViewModel)
@@ -51,9 +57,11 @@ namespace MVC_Data_Assignment.Controllers
             if (ModelState.IsValid)
             {
                 _peopleService.Add(peoplesViewModel.CreatePerson);
+
                 return RedirectToAction(nameof(Index));
             }
 
+            peoplesViewModel.Msg = "Error: Required Fields not Filled in Correctly";
             return View("Index", peoplesViewModel);
         }
 
