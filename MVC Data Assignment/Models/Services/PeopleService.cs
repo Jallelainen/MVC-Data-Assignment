@@ -1,4 +1,5 @@
 ﻿using MVC_Data_Assignment.Models.Data;
+using MVC_Data_Assignment.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace MVC_Data_Assignment.Models.Services
             return _peopleRepo.Read();
         }
 
-        public Person Edit(int id, CreatePersonViewModel people)
+        public Person Edit(int id, EditPersonViewModel people)
         {
             Person editedPeople = new Person( id, people.Name, people.PhoneNum, people.City);
             return _peopleRepo.Update(editedPeople);

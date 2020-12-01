@@ -11,6 +11,7 @@ namespace MVC_Data_Assignment.Models.ViewModels
         public string Search { get; set; }
         public string Msg { get; set; }
         public CreatePersonViewModel CreatePerson { get; set; }
+        public EditPersonViewModel EditPerson { get; set; }
         public List<Person> peopleList { get; set; }
     }
 }

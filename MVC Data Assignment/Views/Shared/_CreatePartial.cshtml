@@ -1,18 +1,18 @@
-﻿@model Person
+﻿@model PeoplesViewModel
 
 <h3>Create Person</h3>
 <form asp-action="Create">
-    <label asp-for="@Model.Name"></label>
-    <input asp-for="@Model.Name" class="form-control col-2" />
-    <span asp-validation-for="@Model.Name"></span>
+    <label asp-for="@Model.CreatePerson.Name"></label>
+    <input asp-for="@Model.CreatePerson.Name" class="form-control col-2" />
+    <span asp-validation-for="@Model.CreatePerson.Name"></span>
     <br />
-    <label asp-for="@Model.PhoneNum"></label>
-    <input asp-for="@Model.PhoneNum" class="form-control col-2" />
-    <span asp-validation-for="@Model.PhoneNum"></span>
+    <label asp-for="@Model.CreatePerson.PhoneNum"></label>
+    <input asp-for="@Model.CreatePerson.PhoneNum" class="form-control col-2" />
+    <span asp-validation-for="@Model.CreatePerson.PhoneNum"></span>
     <br />
-    <label asp-for="@Model.City"></label>
-    <input asp-for="@Model.City" class="form-control col-2" />
-    <span asp-validation-for="@Model.City"></span>
+    <label asp-for="@Model.CreatePerson.City"></label>
+    <input asp-for="@Model.CreatePerson.City" class="form-control col-2" />
+    <span asp-validation-for="@Model.CreatePerson.City"></span>
     <br />
     <input type="submit" class="btn btn-primary" value="Create" />
 </form>

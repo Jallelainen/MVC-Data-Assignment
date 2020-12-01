@@ -25,9 +25,12 @@
 }
 
 <br />
-<button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#CreatePerson">Add Person to List</button>
+<a class="btn btn-secondary btn-sm" asp-controller="People" 
+   asp-action="AjaxCreate" data-target="#CreateEnviroment" 
+   onclick="ShowCreate(event)">Add Person to List</a>
 <br />
-<div id="CreatePerson" class="collapse">
+<div id="CreateEnviroment"></div>
+@*<div id="CreatePerson" class="collapse">
     <h3>Create Person</h3>
     <form asp-action="Create">
         <label asp-for="@Model.CreatePerson.Name"></label>
@@ -44,7 +47,8 @@
         <br />
         <input type="submit" class="btn btn-primary" value="Create" />
     </form>
-</div>
+    <partial name="_CreatePartial" model="Model." />
+</div>*@
 
 <br />
 <div class="row">
@@ -61,7 +65,9 @@
     </div>
 </div>
 
-<div class="row shadow-sm p-4 mb-4 bg-white">
+<partial name="_ShowListPartial" model="Model.peopleList" />
+
+@*<div class="row shadow-sm p-4 mb-4 bg-white">
     <div class="col-12">
         <div class="row">
             <div class="col">
@@ -88,4 +94,4 @@
             </div>
         }
     </div>
-</div>
+</div>*@

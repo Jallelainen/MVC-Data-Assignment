@@ -50,6 +50,11 @@ namespace MVC_Data_Assignment.Controllers
             return View("Index", peoplesViewModel);
         }
 
+        public IActionResult AjaxCreate()
+        {
+            return PartialView("_CreatePartial");
+        }
+
         public IActionResult Create(PeoplesViewModel peoplesViewModel)
         {
             peoplesViewModel.peopleList = _peopleService.All();
@@ -63,6 +68,24 @@ namespace MVC_Data_Assignment.Controllers
 
             peoplesViewModel.Msg = "Error: Required Fields not Filled in Correctly";
             return View("Index", peoplesViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
+
+            Person person = _peopleService.FindBy(Id);
+
+            return PartialView("_EditPersonPartial", person);
+        }
+        
+        [HttpPost]
+        public IActionResult Edit(EditPersonViewModel editPersonViewModel)
+        {
+            _peopleService.Edit(editPersonViewModel.Id, editPersonViewModel);
+
+            return RedirectToAction(nameof(Index));
         }
 
     }

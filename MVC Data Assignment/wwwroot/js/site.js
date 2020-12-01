@@ -6,3 +6,13 @@ $(document).ready(function () {
     $('.toast').toast({ delay: 2000 });
     $('.toast').toast('show');
 });
+
+function ShowCreate(event) {
+    event.preventDefault();
+
+    const anchorElement = event.target;
+
+    $.get(anchorElement.attributes.href, function (result) {
+        $('#' + anchorElement.attributes["data-target"].value).html(result);
+    });
+};
