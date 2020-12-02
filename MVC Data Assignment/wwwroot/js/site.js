@@ -4,6 +4,7 @@
 // Write your JavaScript code.
 //------Fields
 var createBtn = null;
+var createEnv = null;
 
 //-----Scripts
 $(document).ready(function () {
@@ -37,7 +38,7 @@ function ShowCreate(event) {
 function PostCreate(event, createForm) {
     event.preventDefault();
     console.log(createForm.Name.value)
-    //createBtn = $("#createBtn")
+    createEnv = $("#createEnviroment")
 
     $.post(createForm.action,
         {
@@ -48,6 +49,7 @@ function PostCreate(event, createForm) {
         function (data, status) {
             $("#peopleListDiv").append(data);
             $("#createEnviroment").html("");
+            $(createEnv).removeClass("collapse show").addClass("collapse");
 
         }).fail(function (badForm) {
             $("#createEnviroment").html(badForm.responseText);
@@ -74,6 +76,8 @@ function PostEdit(event, editForm) {
             City: editForm.City.value
         },
         function (data, status) {
-
+            $("#listAreaDiv").html(data);
+        }).fail(function (badForm) {
+            $("#listAreaDiv").html(badForm.responseText);
         });
 }

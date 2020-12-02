@@ -85,13 +85,20 @@ namespace MVC_Data_Assignment.Controllers
         [HttpPost]
         public IActionResult Edit(EditPersonViewModel editPersonViewModel, int id)
         {
+            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
+            Person person = _peopleService.FindBy(id);
+
             if (ModelState.IsValid)
             {
                 _peopleService.Edit(id, editPersonViewModel);
+                peoplesViewModel.peopleList = _peopleService.All();
+
+                return PartialView("_ShowListPartial", peoplesViewModel.peopleList);
 
             }
 
-            return RedirectToAction(nameof(Index));
+            Response.StatusCode = 400;
+            return PartialView("_EditPersonPartial", person);
         }
 
     }

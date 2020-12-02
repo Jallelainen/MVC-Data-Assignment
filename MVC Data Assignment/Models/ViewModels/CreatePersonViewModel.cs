@@ -13,7 +13,7 @@ namespace MVC_Data_Assignment.Models
 
         [Display(Name = "Phone Number")]
         [Required]
-        [StringLength(13, MinimumLength = 10)]
+        [RegularExpression("^[0-9]{1,13}$", ErrorMessage = "Must only use numbers.")]
         public string PhoneNum { get; set; }
 
         [Required]

@@ -9,12 +9,16 @@ namespace MVC_Data_Assignment.Models.ViewModels
     public class EditPersonViewModel
     {
         public int Id { get; set; }
+        
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         [Display(Name = "Phone Number")]
-        [StringLength(13, MinimumLength = 10)]
+        [RegularExpression("^[0-9]{1,13}$", ErrorMessage = "Must only use numbers.")]
         public string PhoneNum { get; set; }
 
+        [Required]
         public string City { get; set; }
     }
 }

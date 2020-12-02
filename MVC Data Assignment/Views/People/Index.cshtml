@@ -25,8 +25,8 @@
 }
 
 <br />
-<a class="btn btn-secondary btn-sm" id="createBtn" asp-controller="People" 
-   asp-action="AjaxCreate" data-target="createEnviroment" 
+<a class="btn btn-secondary btn-sm" id="createBtn" asp-controller="People"
+   asp-action="AjaxCreate" data-target="createEnviroment"
    onclick="ShowCreate(event)">Add Person to List</a>
 <br />
 <div class="collapse" id="createEnviroment"></div>
@@ -45,6 +45,7 @@
         </form>
     </div>
 </div>
-
-<partial name="_ShowListPartial" model="Model.peopleList" />
+<div id="listAreaDiv">
+    <partial name="_ShowListPartial" model="Model.peopleList" />
+</div>
 
