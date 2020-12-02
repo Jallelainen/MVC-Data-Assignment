@@ -50,24 +50,26 @@ namespace MVC_Data_Assignment.Controllers
             return View("Index", peoplesViewModel);
         }
 
+        [HttpGet]
         public IActionResult AjaxCreate()
         {
-            return PartialView("_CreatePartial");
+            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
+            return PartialView("_CreatePartial", peoplesViewModel.CreatePerson);
         }
 
-        public IActionResult Create(PeoplesViewModel peoplesViewModel)
+        [HttpPost]
+        public IActionResult AjaxCreatePost(CreatePersonViewModel createViewModel)
         {
-            peoplesViewModel.peopleList = _peopleService.All();
 
             if (ModelState.IsValid)
             {
-                _peopleService.Add(peoplesViewModel.CreatePerson);
+                Person person = _peopleService.Add(createViewModel);
 
-                return RedirectToAction(nameof(Index));
+                return PartialView("_ListItemPartial", person);
             }
 
-            peoplesViewModel.Msg = "Error: Required Fields not Filled in Correctly";
-            return View("Index", peoplesViewModel);
+            Response.StatusCode = 400;
+            return PartialView("_CreatePartial", createViewModel);
         }
 
         [HttpGet]
@@ -79,11 +81,15 @@ namespace MVC_Data_Assignment.Controllers
 
             return PartialView("_EditPersonPartial", person);
         }
-        
+
         [HttpPost]
-        public IActionResult Edit(EditPersonViewModel editPersonViewModel)
+        public IActionResult Edit(EditPersonViewModel editPersonViewModel, int id)
         {
-            _peopleService.Edit(editPersonViewModel.Id, editPersonViewModel);
+            if (ModelState.IsValid)
+            {
+                _peopleService.Edit(id, editPersonViewModel);
+
+            }
 
             return RedirectToAction(nameof(Index));
         }

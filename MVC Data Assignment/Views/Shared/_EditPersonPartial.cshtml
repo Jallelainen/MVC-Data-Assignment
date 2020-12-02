@@ -1,56 +1,54 @@
 ﻿@model Person
 
-<div class="row shadow-sm p-4 mb-4 bg-white">
+
+<div class="row">
+    <div class="col">
+        <h4 class="border border-top-0 border-right-0">Name</h4>
+    </div>
+    <div class="col">
+        <h4 class="border border-top-0 border-right-0">Phone Number</h4>
+    </div>
+    <div class="col">
+        <h4 class="border border-top-0 border-right-0">City</h4>
+    </div>
+    <div class="col">
+        <h4 class="border border-top-0 border-right-0">Action</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>@Model.Name</p>
+    </div>
+    <div class="col">
+        <p>@Model.PhoneNum</p>
+    </div>
+    <div class="col">
+        <p>@Model.City</p>
+    </div>
+    <div class="col">
+        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.Id">Remove</a>
+    </div>
+</div>
+<div class="row">
     <div class="col-12">
-        <div class="row">
-            <div class="col">
-                <h4 class="border border-top-0 border-right-0">Name</h4>
-            </div>
-            <div class="col">
-                <h4 class="border border-top-0 border-right-0">Phone Number</h4>
-            </div>
-            <div class="col">
-                <h4 class="border border-top-0 border-right-0">City</h4>
-            </div>
-            <div class="col">
-                <h4 class="border border-top-0 border-right-0">Action</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>@Model.Name</p>
-            </div>
-            <div class="col">
-                <p>@Model.PhoneNum</p>
-            </div>
-            <div class="col">
-                <p>@Model.City</p>
-            </div>
-            <div class="col">
-                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.Id">Remove</a>
-            </div>
-        </div>
-        <div class="row">
-            <form asp-action="Edit" method="post">
+        <form asp-controller="People" asp-action="Edit" method="post" onsubmit="PostEdit(event, this)">
+            <div class="row">
                 <div class="col">
-                    <label asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control col-2" />
+                    <input asp-for="Name" class="form-control col" />
                     <span asp-validation-for="Name"></span>
                 </div>
                 <div class="col">
-                    <label asp-for="PhoneNum"></label>
-                    <input asp-for="PhoneNum" class="form-control col-2" />
+                    <input asp-for="PhoneNum" class="form-control col" />
                     <span asp-validation-for="PhoneNum"></span>
                 </div>
                 <div class="col">
-                    <label asp-for="City"></label>
-                    <input asp-for="City" class="form-control col-2" />
+                    <input asp-for="City" class="form-control col" />
                     <span asp-validation-for="City"></span>
                 </div>
                 <div class="col">
-                    <input type="submit" class="btn btn-primary" asp-route-id="@Model.Id" value="Edit" />
+                    <input type="submit" class="btn btn-outline-primary" asp-route-id="@Model.Id" value="Edit" />
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>

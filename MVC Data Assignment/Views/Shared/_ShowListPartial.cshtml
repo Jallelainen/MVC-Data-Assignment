@@ -1,21 +1,8 @@
 ﻿@model List<Person>
 
-@*<div class="row">
-    <div class="col-12">
-        <form asp-action="Index" method="post">
-            <div class="input-group mb-3">
-                <input class="form-control col-3" type="search" placeholder="Search the list..." name="search" />
-                <div class="input-group-append">
-                    <button class="btn btn-success btn-sm" type="submit">Search</button>
-                    <button class="btn btn-danger btn-sm" asp-action="Index" method="get">Clear</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>*@
 
 <div class="row shadow-sm p-4 mb-4 bg-white">
-    <div class="col-12">
+    <div class="col-12" id="peopleListDiv">
         <div class="row">
             <div class="col">
                 <h4 class="border border-top-0 border-right-0">Name</h4>
@@ -32,13 +19,9 @@
         </div>
         @foreach (var item in Model)
         {
-            <div class="row">
+            
                 <partial name="_ListItemPartial" model="item" />
-                <div class="col">
-                    <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Remove</a>
-                </div>
-            </div>
+
         }
     </div>
 </div>

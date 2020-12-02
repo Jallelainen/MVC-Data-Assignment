@@ -25,30 +25,11 @@
 }
 
 <br />
-<a class="btn btn-secondary btn-sm" asp-controller="People" 
-   asp-action="AjaxCreate" data-target="#CreateEnviroment" 
+<a class="btn btn-secondary btn-sm" id="createBtn" asp-controller="People" 
+   asp-action="AjaxCreate" data-target="createEnviroment" 
    onclick="ShowCreate(event)">Add Person to List</a>
 <br />
-<div id="CreateEnviroment"></div>
-@*<div id="CreatePerson" class="collapse">
-    <h3>Create Person</h3>
-    <form asp-action="Create">
-        <label asp-for="@Model.CreatePerson.Name"></label>
-        <input asp-for="@Model.CreatePerson.Name" class="form-control col-2" />
-        <span asp-validation-for="@Model.CreatePerson.Name"></span>
-        <br />
-        <label asp-for="@Model.CreatePerson.PhoneNum"></label>
-        <input asp-for="@Model.CreatePerson.PhoneNum" class="form-control col-2" />
-        <span asp-validation-for="@Model.CreatePerson.PhoneNum"></span>
-        <br />
-        <label asp-for="@Model.CreatePerson.City"></label>
-        <input asp-for="@Model.CreatePerson.City" class="form-control col-2" />
-        <span asp-validation-for="@Model.CreatePerson.City"></span>
-        <br />
-        <input type="submit" class="btn btn-primary" value="Create" />
-    </form>
-    <partial name="_CreatePartial" model="Model." />
-</div>*@
+<div class="collapse" id="createEnviroment"></div>
 
 <br />
 <div class="row">
@@ -67,31 +48,3 @@
 
 <partial name="_ShowListPartial" model="Model.peopleList" />
 
-@*<div class="row shadow-sm p-4 mb-4 bg-white">
-    <div class="col-12">
-        <div class="row">
-            <div class="col">
-                <h4 class="border border-top-0 border-right-0">Name</h4>
-            </div>
-            <div class="col">
-                <h4 class="border border-top-0 border-right-0">Phone Number</h4>
-            </div>
-            <div class="col">
-                <h4 class="border border-top-0 border-right-0">City</h4>
-            </div>
-            <div class="col">
-                <h4 class="border border-top-0 border-right-0">Action</h4>
-            </div>
-        </div>
-        @foreach (var item in Model.peopleList)
-        {
-            <div class="row">
-                <partial name="_ListItemPartial" model="item" />
-                <div class="col">
-                    <a class="btn btn-outline-info" asp-action="Delete" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Remove</a>
-                </div>
-            </div>
-        }
-    </div>
-</div>*@

@@ -1,12 +1,20 @@
 ﻿@model Person
 
-<div class="col">
-    <p>@Model.Name</p>
-</div>
-<div class="col">
-    <p>@Model.PhoneNum</p>
-</div>
-<div class="col">
-    <p>@Model.City</p>
-</div>
-
+    <div class="row" id="listItem @Model.Id">
+        <div class="col">
+            <p>@Model.Name</p>
+        </div>
+        <div class="col">
+            <p>@Model.PhoneNum</p>
+        </div>
+        <div class="col">
+            <p>@Model.City</p>
+        </div>
+        <div class="col">
+            <a 
+               class="btn btn-outline-info" asp-controller="People" asp-action="Edit" 
+               asp-route-id="@Model.Id" data-target="peopleListDiv" onclick="ShowEdit(event)"
+             >Edit</a>
+            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.Id">Remove</a>
+        </div>
+    </div>
