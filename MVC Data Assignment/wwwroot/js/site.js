@@ -20,16 +20,10 @@ function ShowCreate(event) {
     createEnv = $("#createEnviroment")
     const anchorElement = event.target;
 
-    if (createEnv[0].attributes.class.value == "collapse") {
         $.get(anchorElement.attributes.href.value, function (result) {
             $('#' + anchorElement.attributes["data-target"].value).html(result);
-            $(createEnv).removeClass("collapse").addClass("collapse show");
+            $(createEnv).toggleClass("show")
         });
-    }
-    else if (createEnv[0].attributes.class.value == "collapse show") {
-        $(createEnv).removeClass("collapse show").addClass("collapse");
-    }
-
 };
 
 function PostCreate(event, createForm) {
