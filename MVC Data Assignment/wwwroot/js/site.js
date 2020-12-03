@@ -37,7 +37,7 @@ function ShowCreate(event) {
 
 function PostCreate(event, createForm) {
     event.preventDefault();
-    console.log(createForm.Name.value)
+
     createEnv = $("#createEnviroment")
 
     $.post(createForm.action,
@@ -50,7 +50,6 @@ function PostCreate(event, createForm) {
             $("#peopleListDiv").append(data);
             $("#createEnviroment").html("");
             $(createEnv).removeClass("collapse show").addClass("collapse");
-
         }).fail(function (badForm) {
             $("#createEnviroment").html(badForm.responseText);
         });
@@ -58,26 +57,39 @@ function PostCreate(event, createForm) {
 
 function ShowEdit(event) {
     event.preventDefault();
-
+    
     const anchorElement = event.target;
 
+    //console.log('#' + anchorElement.attributes["data-target"].value);
+    //console.log(anchorElement.attributes.href.value);
+
     $.get(anchorElement.attributes.href.value, function (result) {
-        $('#' + anchorElement.attributes["data-target"].value).html(result);
+        $('#' + anchorElement.attributes["data-target"].value).replaceWith(result);
     });
 }
 
 function PostEdit(event, editForm) {
     event.preventDefault();
+
     $.post(editForm.action,
         {
-
             Name: editForm.Name.value,
             PhoneNum: editForm.PhoneNum.value,
             City: editForm.City.value
         },
         function (data, status) {
-            $("#listAreaDiv").html(data);
+            $('#' + event.target.attributes[0].value).replaceWith(data);
         }).fail(function (badForm) {
-            $("#listAreaDiv").html(badForm.responseText);
+            $('#' + event.target.attributes[0].value).html(badForm.responseText);
         });
+}
+
+function AjaxDelete(event) {
+    event.preventDefault();
+    anchor = event.target;
+
+    $.get(anchor.attributes.href.value, function (data) {
+        $('#' + anchor.attributes["data-target"].value).remove();
+        //$("#toastMsg").html(data); Tried to insert a toast message but it just showed a blank space. 
+    })
 }

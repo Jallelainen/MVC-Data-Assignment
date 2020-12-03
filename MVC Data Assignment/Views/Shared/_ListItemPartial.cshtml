@@ -1,6 +1,6 @@
 ﻿@model Person
 
-    <div class="row" id="listItem @Model.Id">
+    <div class="row" id="listItem-@Model.Id">
         <div class="col">
             <p>@Model.Name</p>
         </div>
@@ -12,9 +12,11 @@
         </div>
         <div class="col">
             <a 
-               class="btn btn-outline-info" asp-controller="People" asp-action="Edit" 
-               asp-route-id="@Model.Id" data-target="peopleListDiv" onclick="ShowEdit(event)"
-             >Edit</a>
-            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.Id">Remove</a>
+               class="btn btn-outline-warning" asp-controller="People" asp-action="Edit" 
+               asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="ShowEdit(event)">Edit</a>
+            <a 
+               class="btn btn-outline-danger" asp-controller="People" asp-action="Delete" 
+               asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="AjaxDelete(event)">Remove</a>
         </div>
     </div>
+

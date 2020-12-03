@@ -4,15 +4,15 @@
 <form asp-controller="People" asp-action="AjaxCreatePost" method="post" onsubmit="PostCreate(event, this)">
     <label asp-for="Name"></label>
     <input asp-for="Name" class="form-control col-2" />
-    <span asp-validation-for="Name"></span>
+    <span asp-validation-for="Name" style="color: orangered"></span>
     <br />
     <label asp-for="PhoneNum"></label>
     <input asp-for="PhoneNum" class="form-control col-2" />
-    <span asp-validation-for="PhoneNum"></span>
+    <span asp-validation-for="PhoneNum" style="color: orangered"></span>
     <br />
     <label asp-for="City"></label>
     <input asp-for="City" class="form-control col-2" />
-    <span asp-validation-for="City"></span>
+    <span asp-validation-for="City" style="color: orangered"></span>
     <br />
     <input type="submit" class="btn btn-primary" value="Create" />
 </form>

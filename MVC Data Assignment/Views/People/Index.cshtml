@@ -5,24 +5,26 @@
 
 <h1>People List Index</h1>
 
-@if (@Model.Msg != null)
-{
-    <div class="toast">
-        <div class="toast-header">
-            <h5>Message</h5>
+<div id="toastMsg">
+    @if (@Model.Msg != null)
+    {
+        <div class="toast">
+            <div class="toast-header">
+                <h5>Message</h5>
+            </div>
+            <div class="toast-body">
+                @if (Model.Msg.Contains("Error"))
+                {
+                    <p style="color: red">@Model.Msg</p>
+                }
+                else
+                {
+                    <p style="color: green">@Model.Msg</p>
+                }
+            </div>
         </div>
-        <div class="toast-body">
-            @if (Model.Msg.Contains("Error"))
-            {
-                <p style="color: red">@Model.Msg</p>
-            }
-            else
-            {
-                <p style="color: green">@Model.Msg</p>
-            }
-        </div>
-    </div>
-}
+    }
+</div>
 
 <br />
 <a class="btn btn-secondary btn-sm" id="createBtn" asp-controller="People"
