@@ -41,12 +41,19 @@ namespace MVC_Data_Assignment.Controllers
         public IActionResult Delete(int id)
         {
             PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
+            Person person = _peopleService.FindBy(id);
 
-            if (ModelState.IsValid)
+            if (person != null)
             {
                 _peopleService.Remove(id);
                 peoplesViewModel.Msg = "Person Successfully Removed";
+
             }
+            else
+            {
+                return NotFound();
+            }
+
             return PartialView("_DeletePartial", peoplesViewModel); //Tried to insert a toast message but it just showed a blank space. 
         }
 
@@ -77,7 +84,15 @@ namespace MVC_Data_Assignment.Controllers
         {
             Person person = _peopleService.FindBy(Id);
 
-            return PartialView("_EditPersonPartial", person);
+            if (person != null)
+            {
+                return PartialView("_EditPersonPartial", person);
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
 
         [HttpPost]
