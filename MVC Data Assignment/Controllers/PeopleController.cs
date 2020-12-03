@@ -75,7 +75,6 @@ namespace MVC_Data_Assignment.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
             Person person = _peopleService.FindBy(Id);
 
             return PartialView("_EditPersonPartial", person);

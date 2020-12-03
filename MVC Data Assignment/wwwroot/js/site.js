@@ -20,9 +20,6 @@ function ShowCreate(event) {
     createEnv = $("#createEnviroment")
     const anchorElement = event.target;
 
-    //console.log('#' + anchorElement.attributes["data-target"].value)
-    //console.log(createEnv[0].attributes.class)
-
     if (createEnv[0].attributes.class.value == "collapse") {
         $.get(anchorElement.attributes.href.value, function (result) {
             $('#' + anchorElement.attributes["data-target"].value).html(result);
@@ -59,9 +56,6 @@ function ShowEdit(event) {
     event.preventDefault();
     
     const anchorElement = event.target;
-
-    //console.log('#' + anchorElement.attributes["data-target"].value);
-    //console.log(anchorElement.attributes.href.value);
 
     $.get(anchorElement.attributes.href.value, function (result) {
         $('#' + anchorElement.attributes["data-target"].value).replaceWith(result);
