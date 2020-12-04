@@ -81,3 +81,29 @@ function AjaxDelete(event) {
         //$("#toastMsg").html(data); Tried to insert a toast message but it just showed a blank space. 
     })
 }
+
+function AjaxClearSearch(event) {
+    event.preventDefault();
+    button = event.target;
+
+    console.log(event);
+
+    $.get(button.attributes.formaction.value, function (data) {
+        $('#' + button.attributes["data-target"].value).html(data);
+        $("#searchInput").val('').attr("placeholder", "Search the list...");
+    });
+}
+
+function AjaxSearch(event, searchForm) {
+    event.preventDefault();
+
+    console.log(searchForm.Search.value);
+
+    $.post(searchForm.action,
+        {
+            Search: searchForm.Search.value
+
+        }, function (data) {
+            $("#listAreaDiv").html(data);
+        });
+}

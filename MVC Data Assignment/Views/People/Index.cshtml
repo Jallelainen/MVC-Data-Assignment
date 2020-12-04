@@ -15,12 +15,13 @@
 <br />
 <div class="row">
     <div class="col-12">
-        <form asp-action="Index" method="post">
+        <form asp-controller="People" asp-action="Search" method="post" onsubmit="AjaxSearch(event, this)">
             <div class="input-group mb-3">
-                <input class="form-control col-3" type="search" placeholder="Search the list..." name="search" />
+                <input class="form-control col-3" id="searchInput" asp-for="Search" placeholder="Search the list..."/>
                 <div class="input-group-append">
                     <button class="btn btn-success btn-sm" type="submit">Search</button>
-                    <button class="btn btn-danger btn-sm" asp-action="Index" method="get">Clear</button>
+                    <button class="btn btn-danger btn-sm" asp-controller="People" asp-action="ClearSearch" 
+                     data-target="listAreaDiv" onclick="AjaxClearSearch(event)">Clear</button>
                 </div>
             </div>
         </form>

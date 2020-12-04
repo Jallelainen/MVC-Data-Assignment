@@ -13,7 +13,6 @@ namespace MVC_Data_Assignment.Controllers
     {
         private IPeopleService _peopleService = new PeopleService();
 
-        [HttpGet]
         public IActionResult Index()
         {
             PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
@@ -22,19 +21,29 @@ namespace MVC_Data_Assignment.Controllers
             return View(peoplesViewModel);
         }
 
-        [HttpPost]
-        public IActionResult Index(PeoplesViewModel peoplesViewModel)
+
+        [HttpGet]
+        public IActionResult ClearSearch()
         {
+            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
             peoplesViewModel.peopleList = _peopleService.All();
+
+            return PartialView("_ShowListPartial", peoplesViewModel.peopleList);
+        }
+
+        [HttpPost]
+        public IActionResult Search(PeoplesViewModel peoplesViewModel)
+        {
 
             if (peoplesViewModel.Search != null)
             {
                 peoplesViewModel.peopleList = _peopleService.Search(peoplesViewModel.Search);
-                return View(peoplesViewModel);
+                return PartialView("_ShowListPartial", peoplesViewModel.peopleList);
             }
             else
             {
-                return View(peoplesViewModel);
+                peoplesViewModel.peopleList = _peopleService.All();
+                return PartialView("_ShowListPartial", peoplesViewModel.peopleList);
             }
         }
 
