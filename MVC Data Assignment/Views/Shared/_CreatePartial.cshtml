@@ -1,18 +1,23 @@
 ﻿@model CreatePersonViewModel
 
-<h3>Create Person</h3>
-<form asp-controller="People" asp-action="AjaxCreatePost" method="post" onsubmit="PostCreate(event, this)">
-    <label asp-for="Name"></label>
-    <input asp-for="Name" class="form-control col-2" />
-    <span asp-validation-for="Name" style="color: orangered"></span>
-    <br />
-    <label asp-for="PhoneNum"></label>
-    <input asp-for="PhoneNum" class="form-control col-2" />
-    <span asp-validation-for="PhoneNum" style="color: orangered"></span>
-    <br />
-    <label asp-for="City"></label>
-    <input asp-for="City" class="form-control col-2" />
-    <span asp-validation-for="City" style="color: orangered"></span>
-    <br />
-    <input type="submit" class="btn btn-primary" value="Create" />
-</form>
+
+
+<div class="row shadow-sm p-4 mb-4 bg-white">
+        <form asp-controller="People" asp-action="AjaxCreatePost" method="post" onsubmit="PostCreate(event, this)">
+            <h3 id="createPRSN">Create Person</h3>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control mr-sm-2" />
+            <span asp-validation-for="Name" style="color: orangered"></span>
+            <br />
+            <label asp-for="PhoneNum"></label>
+            <input asp-for="PhoneNum" class="form-control mr-sm-2" />
+            <span asp-validation-for="PhoneNum" style="color: orangered"></span>
+            <br />
+            <label asp-for="City"></label>
+            <input asp-for="City" class="form-control mr-sm-2" />
+            <span asp-validation-for="City" style="color: orangered"></span>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Create" />
+        </form>
+
+</div>
