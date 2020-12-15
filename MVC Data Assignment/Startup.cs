@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC_Data_Assignment.Models.Data;
+using MVC_Data_Assignment.Models.Database;
+using MVC_Data_Assignment.Models.Services;
 
 namespace MVC_Data_Assignment
 {
@@ -23,6 +27,13 @@ namespace MVC_Data_Assignment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PeopleDbContext>(options => 
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IPeopleService, PeopleService>();// container setting for IoC
+            //services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();// container setting for IoC
+            services.AddScoped<IPeopleRepo, DataBasePeopleRepo>();// container setting for IoC
+
             services.AddMvc();
         }
 

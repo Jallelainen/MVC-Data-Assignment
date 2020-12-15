@@ -9,7 +9,12 @@ namespace MVC_Data_Assignment.Models.Services
 {
     public class PeopleService : IPeopleService
     {
-        IPeopleRepo _peopleRepo = new InMemoryPeopleRepo();
+        IPeopleRepo _peopleRepo;
+        
+        public PeopleService(IPeopleRepo peopleRepo)
+        {
+            _peopleRepo = peopleRepo;
+        }
 
         public Person Add(CreatePersonViewModel createPersonViewModel)
         {

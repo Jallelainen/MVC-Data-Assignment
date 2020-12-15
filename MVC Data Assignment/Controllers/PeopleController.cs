@@ -11,7 +11,12 @@ namespace MVC_Data_Assignment.Controllers
 {
     public class PeopleController : Controller
     {
-        private IPeopleService _peopleService = new PeopleService();
+        private IPeopleService _peopleService;
+
+        public PeopleController(IPeopleService peopleService)
+        {
+            _peopleService = peopleService;
+        }
 
         public IActionResult Index()
         {
