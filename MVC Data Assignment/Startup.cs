@@ -31,7 +31,6 @@ namespace MVC_Data_Assignment
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IPeopleService, PeopleService>();// container setting for IoC
-            //services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();// container setting for IoC
             services.AddScoped<IPeopleRepo, DataBasePeopleRepo>();// container setting for IoC
 
             services.AddMvc();
