@@ -26,9 +26,28 @@ namespace MVC_Data_Assignment.Models.Data
             return person;
         }
 
-        public bool Delete(Person people)
+        public bool Delete(Person person)
         {
-            throw new NotImplementedException();
+            if (person != null)
+            {
+                _peopleDbContext.PeopleList.Remove(person);
+
+                if (_peopleDbContext.SaveChanges() != 0)
+                {
+                    return true;
+
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public List<Person> Read()
@@ -38,12 +57,32 @@ namespace MVC_Data_Assignment.Models.Data
 
         public Person Read(int id)
         {
-            return _peopleDbContext.PeopleList.SingleOrDefault( personList => personList.Id == id);
+            return _peopleDbContext.PeopleList.SingleOrDefault(personList => personList.Id == id);
         }
 
-        public Person Update(Person people)
+        public Person Update(Person person)
         {
-            throw new NotImplementedException();
+            Person originalPerson = Read(person.Id);
+
+            if (originalPerson == null)
+            {
+                return null;
+            }
+
+            originalPerson.Name = person.Name;
+            originalPerson.PhoneNum = person.PhoneNum;
+            originalPerson.City = person.City;
+
+            _peopleDbContext.PeopleList.Update(originalPerson);
+
+            if (_peopleDbContext.SaveChanges() != 0)
+            {
+                return originalPerson;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
