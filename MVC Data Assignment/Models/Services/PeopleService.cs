@@ -59,7 +59,7 @@ namespace MVC_Data_Assignment.Models.Services
             foreach (var item in All())
             {
 
-                if (item.Name.ToUpper().Contains(search.ToUpper()) || item.PhoneNum.Contains(search) || item.City.ToUpper().Contains(search.ToUpper()))
+                if (item.Name.ToUpper().Contains(search.ToUpper()) || item.PhoneNum.Contains(search) || item.City.ToString().ToUpper().Contains(search.ToUpper())) //city.toString?
                 {
                     filterList.Add(item);
                 }

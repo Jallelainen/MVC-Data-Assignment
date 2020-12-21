@@ -17,6 +17,6 @@ namespace MVC_Data_Assignment.Models
         public string PhoneNum { get; set; }
 
         [Required]
-        public string City { get; set; }
+        public City City { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace MVC_Data_Assignment.Models.Data
         private static List<Person> peopleList = new List<Person>();
         private static int idCounter = 0;
 
-        public Person Create(string name, string phoneNum, string city)
+        public Person Create(string name, string phoneNum, City city)
         {
             Person people = new Person(++idCounter, name, phoneNum, city);
             peopleList.Add(people);

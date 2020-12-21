@@ -15,7 +15,7 @@ namespace MVC_Data_Assignment.Models.Data
             _peopleDbContext = peopleDbContext;
         }
 
-        public Person Create(string name, string phoneNum, string city)
+        public Person Create(string name, string phoneNum, City city)
         {
             Person person = new Person(name, phoneNum, city);
 
