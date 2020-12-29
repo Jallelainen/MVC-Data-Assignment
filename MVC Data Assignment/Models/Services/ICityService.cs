@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Models.Services
 {
-    interface ICityService
+    public interface ICityService
     {
     }
 }

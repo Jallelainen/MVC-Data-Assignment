@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Models.Data
 {
-    interface ICityRepo
+    public interface ICityRepo
     {
         City Create(string name, Country country, List<Person> cityPeople);
-        City Read(int id, City city);
+        City Read(int id);
+        List<City> Read();
         City Update(City city);
         bool Delete(City city);
     }

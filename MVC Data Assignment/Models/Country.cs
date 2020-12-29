@@ -15,7 +15,7 @@ namespace MVC_Data_Assignment.Models
 
         public List<Person> CountryPeopleList { get; set; }
 
-
+        public Country () { }
         public Country (string name, List<City> cities, List<Person> countryPeople)
         {
             Name = name;

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Models.ViewModels
 {
-    public class CityViewModel
+    public class CreateCityViewModel
     {
     }
 }

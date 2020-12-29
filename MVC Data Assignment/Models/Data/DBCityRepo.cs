@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC_Data_Assignment.Models.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,24 +8,83 @@ namespace MVC_Data_Assignment.Models.Data
 {
     public class DBCityRepo : ICityRepo
     {
+        private readonly PeopleDbContext _peopleDbContext;
+
+        public DBCityRepo(PeopleDbContext peopleDbContext)
+        {
+            _peopleDbContext = peopleDbContext;
+        }
+
         public City Create(string name, Country country, List<Person> cityPeople)
         {
-            throw new NotImplementedException();
+            City city = new City(name, country, cityPeople);
+
+            _peopleDbContext.CityList.Add(city);
+
+            if (_peopleDbContext.SaveChanges() != 0)
+            {
+                return city;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public bool Delete(City city)
         {
-            throw new NotImplementedException();
+            if(city != null)
+            {
+                _peopleDbContext.CityList.Remove(city);
+
+                if (_peopleDbContext.SaveChanges() != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public City Read(int id, City city)
+        public City Read(int id)
         {
-            throw new NotImplementedException();
+            return _peopleDbContext.CityList.SingleOrDefault(cityList => cityList.Id == id);
+        }
+
+        public List<City> Read()
+        {
+            return _peopleDbContext.CityList.ToList();
         }
 
         public City Update(City city)
         {
-            throw new NotImplementedException();
+            City orginalCity = Read(city.Id);
+
+            if (orginalCity == null)
+            {
+                return null;
+            }
+
+            orginalCity.Name = city.Name;
+            orginalCity.Country = city.Country;
+            orginalCity.CityPeopleList = city.CityPeopleList;
+
+            _peopleDbContext.CityList.Update(orginalCity);
+
+            if (_peopleDbContext.SaveChanges() != 0)
+            {
+                return orginalCity;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

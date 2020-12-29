@@ -21,9 +21,14 @@ namespace MVC_Data_Assignment.Models.Data
 
             _peopleDbContext.PeopleList.Add(person);
 
-            _peopleDbContext.SaveChanges();
-
-            return person;
+            if (_peopleDbContext.SaveChanges() != 0)
+            {
+                return person;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public bool Delete(Person person)
