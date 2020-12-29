@@ -15,9 +15,9 @@ namespace MVC_Data_Assignment.Models.Data
             _peopleDbContext = peopleDbContext;
         }
 
-        public Country Create(string name, List<City> cities, List<Person> countryPeople)
+        public Country Create(string name, List<City> cities)
         {
-            Country country = new Country(name, cities, countryPeople);
+            Country country = new Country(name, cities);
             
             _peopleDbContext.CountryList.Add(country);
 
@@ -73,7 +73,6 @@ namespace MVC_Data_Assignment.Models.Data
 
             originalCountry.Name = country.Name;
             originalCountry.CitiesList = country.CitiesList;
-            originalCountry.CountryPeopleList = country.CountryPeopleList;
 
             _peopleDbContext.CountryList.Update(originalCountry);
 

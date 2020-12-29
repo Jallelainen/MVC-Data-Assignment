@@ -17,18 +17,40 @@ namespace MVC_Data_Assignment.Models.Data
 
         public Person Create(string name, string phoneNum, City city)
         {
-            Person person = new Person(name, phoneNum, city);
-
-            _peopleDbContext.PeopleList.Add(person);
-
-            if (_peopleDbContext.SaveChanges() != 0)
+            Person lastId = _peopleDbContext.PeopleList.Last();
+            if (lastId != null)
             {
-                return person;
+                Person person = new Person(lastId.Id++, name, phoneNum, city);
+                
+                _peopleDbContext.PeopleList.Add(person);
+
+                if (_peopleDbContext.SaveChanges() != 0)
+                {
+                    return person;
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
-                return null;
+                int idCounter = 0;
+                Person person = new Person(idCounter++, name, phoneNum, city);
+
+                _peopleDbContext.PeopleList.Add(person);
+
+                if (_peopleDbContext.SaveChanges() != 0)
+                {
+                    return person;
+                }
+                else
+                {
+                    return null;
+                }
             }
+
+
         }
 
         public bool Delete(Person person)

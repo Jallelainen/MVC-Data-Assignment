@@ -18,7 +18,7 @@ namespace MVC_Data_Assignment.Models.Services
 
         public Country Add(CreateCountryViewModel createCountryViewModel)
         {
-            return _countryRepo.Create(createCountryViewModel.Name, createCountryViewModel.CitiesList, createCountryViewModel.PersonList);
+            return _countryRepo.Create(createCountryViewModel.Name, createCountryViewModel.CitiesList);
         }
 
         public List<Country> All()
@@ -28,7 +28,7 @@ namespace MVC_Data_Assignment.Models.Services
 
         public Country Edit(string name, CreateCountryViewModel country)
         {
-            Country editedCountry = new Country(name, country.CitiesList, country.PersonList);
+            Country editedCountry = new Country(name, country.CitiesList);
             return _countryRepo.Update(editedCountry);
         }
 

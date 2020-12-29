@@ -13,14 +13,11 @@ namespace MVC_Data_Assignment.Models
 
         public List<City> CitiesList { get; set; }
 
-        public List<Person> CountryPeopleList { get; set; }
-
         public Country () { }
-        public Country (string name, List<City> cities, List<Person> countryPeople)
+        public Country (string name, List<City> cities)
         {
             Name = name;
             CitiesList = cities;
-            CountryPeopleList = countryPeople;
         }
     }
 }
