@@ -7,8 +7,8 @@ namespace MVC_Data_Assignment.Models.Data
 {
     public interface ICountryRepo
     {
-        Country Create(string name, List<City> cities);
-        Country Read(string name);
+        Country Create(string name);
+        Country Read(int id);
         List<Country> Read();
         Country Update(Country country);
         bool Delete(Country country);

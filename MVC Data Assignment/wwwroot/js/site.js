@@ -20,10 +20,10 @@ function ShowCreate(event) {
     createEnv = $("#createEnviroment")
     const anchorElement = event.target;
 
-        $.get(anchorElement.attributes.href.value, function (result) {
-            $('#' + anchorElement.attributes["data-target"].value).html(result);
-            $(createEnv).toggleClass("show")
-        });
+    $.get(anchorElement.attributes.href.value, function (result) {
+        $('#' + anchorElement.attributes["data-target"].value).html(result);
+        $(createEnv).toggleClass("show")
+    });
 };
 
 function PostCreate(event, createForm) {
@@ -48,7 +48,7 @@ function PostCreate(event, createForm) {
 
 function ShowEdit(event) {
     event.preventDefault();
-    
+
     const anchorElement = event.target;
 
     $.get(anchorElement.attributes.href.value, function (result) {
@@ -106,4 +106,25 @@ function AjaxSearch(event, searchForm) {
         }, function (data) {
             $("#listAreaDiv").html(data);
         });
+}
+
+function ShowDetails(event) {
+    event.preventDefault();
+
+    const anchorElement = event.target;
+    console.log(anchorElement.attributes.href.value);
+
+    $.get(anchorElement.attributes.href.value, function (result) {
+        $('#' + anchorElement.attributes["data-target"].value).replaceWith(result);
+    });
+}
+
+function CloseDetails(event) {
+    event.preventDefault();
+
+    const anchorElement = event.target;
+
+    $.get(anchorElement.attributes.href.value, function (result) {
+        $('#' + anchorElement.attributes["data-target"].value).replaceWith(result);
+    });
 }

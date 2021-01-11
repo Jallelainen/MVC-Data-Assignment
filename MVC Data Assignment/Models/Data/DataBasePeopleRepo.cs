@@ -1,4 +1,5 @@
-﻿using MVC_Data_Assignment.Models.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_Data_Assignment.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,12 +80,12 @@ namespace MVC_Data_Assignment.Models.Data
 
         public List<Person> Read()
         {
-            return _peopleDbContext.PeopleList.ToList();
+            return _peopleDbContext.PeopleList.Include(p => p.City).ToList();
         }
 
         public Person Read(int id)
         {
-            return _peopleDbContext.PeopleList.SingleOrDefault(personList => personList.Id == id);
+            return _peopleDbContext.PeopleList.Include(p => p.City).SingleOrDefault(personList => personList.Id == id);
         }
 
         public Person Update(Person person)

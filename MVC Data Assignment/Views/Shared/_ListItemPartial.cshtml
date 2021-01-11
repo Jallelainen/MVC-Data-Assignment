@@ -1,22 +1,16 @@
 ﻿@model Person
 
-    <div class="row" id="listItem-@Model.Id">
-        <div class="col">
-            <p>@Model.Name</p>
-        </div>
-        <div class="col">
-            <p>@Model.PhoneNum</p>
-        </div>
-        <div class="col">
-            <p>@Model.City</p>
-        </div>
-        <div class="col">
-            <a 
-               class="btn btn-outline-warning" asp-controller="People" asp-action="Edit" 
-               asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="ShowEdit(event)">Edit</a>
-            <a 
-               class="btn btn-outline-danger" asp-controller="People" asp-action="Delete" 
-               asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="AjaxDelete(event)">Remove</a>
-        </div>
+<div class="row" id="listItem-@Model.Id">
+    <div class="col-8">
+        <p>@Model.Name</p>
     </div>
+    <div class="col-4">
+        <a class="btn btn-outline-warning" asp-controller="People" asp-action="Edit"
+           asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="ShowEdit(event)">Edit</a>
+        <a class="btn btn-outline-danger" asp-controller="People" asp-action="Delete"
+           asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="AjaxDelete(event)">Remove</a>
+        <a class="btn btn-outline-info" asp-controller="People" asp-action="Details"
+           asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="ShowDetails(event)">Details</a>
+    </div>
+</div>
 

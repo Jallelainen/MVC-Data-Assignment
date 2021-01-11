@@ -10,9 +10,9 @@ namespace MVC_Data_Assignment.Models.Services
     {
         Country Add(CreateCountryViewModel createCountryViewModel);
         List<Country> All();
-        Country FindBy(string name);
+        Country FindBy(int id);
         Country Edit(string name, CreateCountryViewModel country);
-        bool Remove(string name);
+        bool Remove(int id);
         List<Country> Search(string search);
 
 

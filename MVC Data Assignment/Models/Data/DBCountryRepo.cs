@@ -1,4 +1,5 @@
-﻿using MVC_Data_Assignment.Models.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_Data_Assignment.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace MVC_Data_Assignment.Models.Data
             _peopleDbContext = peopleDbContext;
         }
 
-        public Country Create(string name, List<City> cities)
+        public Country Create(string name)
         {
-            Country country = new Country(name, cities);
+            Country country = new Country(name);
             
             _peopleDbContext.CountryList.Add(country);
 
@@ -52,9 +53,9 @@ namespace MVC_Data_Assignment.Models.Data
             }
         }
 
-        public Country Read(string name)
+        public Country Read(int id)
         {
-            return _peopleDbContext.CountryList.SingleOrDefault(countryList => countryList.Name == name);
+            return _peopleDbContext.CountryList.Include(c => c.CitiesList).SingleOrDefault(countryList => countryList.ID == id);
         }
 
         public List<Country> Read()
@@ -64,7 +65,7 @@ namespace MVC_Data_Assignment.Models.Data
 
         public Country Update(Country country)
         {
-            Country originalCountry = Read(country.Name);
+            Country originalCountry = Read(country.ID);
 
             if (originalCountry == null)
             {

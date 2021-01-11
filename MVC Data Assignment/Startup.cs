@@ -31,7 +31,11 @@ namespace MVC_Data_Assignment
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IPeopleService, PeopleService>();// container setting for IoC
+            services.AddScoped<ICityService, CityService>();// container setting for IoC
+            services.AddScoped<ICountryService, CountryService>();// container setting for IoC
             services.AddScoped<IPeopleRepo, DataBasePeopleRepo>();// container setting for IoC
+            services.AddScoped<ICityRepo, DBCityRepo>();// container setting for IoC
+            services.AddScoped<ICountryRepo, DBCountryRepo>();// container setting for IoC
 
             services.AddMvc();
         }

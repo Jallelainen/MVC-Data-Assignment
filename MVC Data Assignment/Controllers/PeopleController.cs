@@ -126,5 +126,20 @@ namespace MVC_Data_Assignment.Controllers
             return PartialView("_EditPersonPartial", person);
         }
 
+        public IActionResult Details(int id)
+        {
+            Person person = new Person();
+            person = _peopleService.FindBy(id);
+
+            return PartialView("_PersonDetailPartial", person);
+        }
+
+        public IActionResult CloseDetails(int id)
+        {
+            Person person = new Person();
+            person = _peopleService.FindBy(id);
+
+            return PartialView("_ListItemPartial", person);
+        }
     }
 }
