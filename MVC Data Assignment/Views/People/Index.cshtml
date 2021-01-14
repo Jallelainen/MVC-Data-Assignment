@@ -3,27 +3,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>People List Index</h1>
+<h1>People Index</h1>
 
 <br/>
 
 
 <div class="row">
-    <div class="col">
+    <div class="col-4">
         <a class="btn btn-secondary btn-sm" id="createBtn" asp-controller="People"
            asp-action="AjaxCreate" data-target="createEnviroment"
-           onclick="ShowCreate(event)">Add Person to List</a>
+           onclick="ShowCreate(event)">Add Person to List &#5121;</a>
     </div>
-    <div class="col">
+    <div class="col-8">
         <form asp-controller="People" asp-action="Search" method="post" onsubmit="AjaxSearch(event, this)">
             <div class="input-group mb-3">
                 <input class="form-control col" id="searchInput" asp-for="Search" placeholder="Search the list..." />
                 <div class="input-group-append">
                     <button class="btn btn-success btn-sm" type="submit">Search</button>
                     <button class="btn btn-danger btn-sm" asp-controller="People" asp-action="ClearSearch"
-                            data-target="listAreaDiv" onclick="AjaxClearSearch(event)">
-                        Clear
-                    </button>
+                            data-target="listAreaDiv" onclick="AjaxClearSearch(event)">Clear</button>
                 </div>
             </div>
         </form>
@@ -32,6 +30,11 @@
 <div class="collapse" id="createEnviroment"></div>
 
 <div id="listAreaDiv">
+    <div class="btn-group btn-group">
+        <a class="btn btn-outline-primary" asp-controller="Country" asp-action="Index">Countries</a>
+        <a class="btn btn-outline-primary" asp-controller="City" asp-action="Index">Cities</a>
+        <a class="btn btn-outline-primary active">People</a>
+    </div>
     <partial name="_ShowListPartial" model="Model.peopleList" />
 </div>
 

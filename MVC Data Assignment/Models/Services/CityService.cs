@@ -26,9 +26,9 @@ namespace MVC_Data_Assignment.Models.Services
             return _cityRepo.Read();
         }
 
-        public City Edit(int id, CreateCityViewModel editCityViewModel)
+        public City Edit(City city)
         {
-            City editedCity = new City(id, editCityViewModel.Name, editCityViewModel.Country, editCityViewModel.CityPeopleList);
+            City editedCity = new City(city.Id, city.Name, city.Country, city.CityPeopleList);
             return _cityRepo.Update(editedCity);
         }
 
@@ -57,7 +57,7 @@ namespace MVC_Data_Assignment.Models.Services
 
             foreach (var item in All())
             {
-                if (item.Name.ToUpper().Contains(search.ToUpper()) || item.Country.ToString().ToUpper().Contains(search.ToUpper()))
+                if (item.Name.ToUpper().Contains(search.ToUpper())) // || item.Country.ToString().ToUpper().Contains(search.ToUpper())
                 {
                     filteredList.Add(item);
                 }

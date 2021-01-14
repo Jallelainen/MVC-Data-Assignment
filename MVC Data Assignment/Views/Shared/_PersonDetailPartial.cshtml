@@ -19,7 +19,7 @@
     </div>
     <div class="col-4">
         <a class="btn btn-outline-warning" asp-controller="People" asp-action="Edit"
-           asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="ShowEdit(event)">Edit</a>
+           asp-route-id="@Model.Id" data-target="peopleListDiv" onclick="ShowEdit(event)">Edit</a>
         <a class="btn btn-outline-danger" asp-controller="People" asp-action="Delete"
            asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="AjaxDelete(event)">Remove</a>
         <a class="btn btn-outline-info" asp-controller="People" asp-action="CloseDetails"

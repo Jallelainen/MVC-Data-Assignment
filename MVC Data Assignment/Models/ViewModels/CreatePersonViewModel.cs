@@ -16,7 +16,8 @@ namespace MVC_Data_Assignment.Models
         [RegularExpression("^[0-9]{1,13}$", ErrorMessage = "Must only use numbers.")]
         public string PhoneNum { get; set; }
 
-        [Required]
         public City City { get; set; }
+
+        public List<City>  cities { get; set; }
     }
 }

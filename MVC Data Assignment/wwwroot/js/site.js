@@ -17,12 +17,22 @@ $(document).ready(function () {
 function ShowCreate(event) {
     event.preventDefault();
 
-    createEnv = $("#createEnviroment")
+    createEnv = $("#createEnviroment");
     const anchorElement = event.target;
+    var btn = document.getElementById("createBtn");
+    console.log(("#createBtn").text);
 
     $.get(anchorElement.attributes.href.value, function (result) {
         $('#' + anchorElement.attributes["data-target"].value).html(result);
-        $(createEnv).toggleClass("show")
+        $(createEnv).toggleClass("show");
+
+
+        if (("#createBtn").text == "Add Person to List &#5121;") {
+            $("#createBtn").text("Close &#5123;");
+        }
+        else {
+            $("#createBtn").text("Add Person to List &#5121;");
+        }
     });
 };
 
@@ -63,7 +73,7 @@ function PostEdit(event, editForm) {
         {
             Name: editForm.Name.value,
             PhoneNum: editForm.PhoneNum.value,
-            City: editForm.City.value
+            City: editForm.City.Name.value
         },
         function (data, status) {
             $('#' + event.target.attributes[0].value).replaceWith(data);

@@ -1,0 +1,28 @@
+﻿@model CreateCityViewModel
+
+<div class="row shadow-sm p-4 mb-4 bg-white">
+    <div class="col-12" id="peopleListDiv">
+        <form asp-controller="City" asp-action="Create" method="post" >
+            <h3 id="createPRSN">Add City</h3>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control mr-sm-2" />
+            <span asp-validation-for="Name" style="color: orangered"></span>
+            <br />
+            <label>Country:</label>
+            <select asp-for="Country.Name" class="form-control col">
+                @if (Model.CountryList != null)
+                {
+                    @foreach (Country item in Model.CountryList)
+                    {
+                        <option value="@item.Name">@item.Name</option>
+                    }
+                }
+
+            </select>
+            <span asp-validation-for="Country.Name" style="color: orangered"></span>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Add" />
+            <button class="btn btn-secondary" asp-controller="City" asp-action="Index" style="transform: translateY(-5px)">Back</button>
+        </form>
+    </div>
+</div>

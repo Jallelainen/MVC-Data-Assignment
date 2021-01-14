@@ -10,8 +10,12 @@ namespace MVC_Data_Assignment.Models.ViewModels
     {
         [Required]
         public string Name { get; set; }
+        public string Search { get; set; }
 
         public List<City> CitiesList { get; set; }
+        public List<Country> CountryList { get; set; }
+
+        
         public List<Person> PersonList { get; set; }
     }
 }

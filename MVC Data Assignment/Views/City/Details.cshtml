@@ -1,0 +1,33 @@
+﻿@model City
+
+<h1>City Index</h1>
+
+<br />
+<div class="row">
+    <div class="col">
+        <h4 class="border border-top-0 border-right-0">@Model.Name</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h5>People in City</h5>
+        <ol>
+            @foreach (Person item in Model.CityPeopleList)
+            {
+                <li><b>Name:</b>@item.Name <b>Phone:</b>@item.PhoneNum</li>
+            }
+        </ol>
+    </div>
+    <div class="col">
+        @if (Model.Country != null)
+        {
+            <p><b>Country:</b> @Model.Country</p>
+        }
+    </div>
+</div>
+<div class="row"> 
+    <div class="col">
+        <a class="btn btn-danger" asp-controller="City" asp-action="Index">Back</a>
+    </div>
+</div>
+

@@ -20,13 +20,16 @@ namespace MVC_Data_Assignment.Controllers
 
         public IActionResult Index()
         {
-            return View(_countryService.All());
+            CreateCountryViewModel createCountryView = new CreateCountryViewModel();
+            createCountryView.CountryList = _countryService.All();
+
+            return View(createCountryView);
         }
 
         public IActionResult Details(int id)
         {
             Country country = new Country();
-            country = _countryService.FindBy(id); 
+            country = _countryService.FindBy(id);
 
             return PartialView("_CountryDetailPartial", country);
         }
@@ -38,13 +41,54 @@ namespace MVC_Data_Assignment.Controllers
 
             return PartialView("_CreateCountryPartial", createCountryViewModel);
         }
-        
+
         [HttpPost]
         public IActionResult Create(CreateCountryViewModel newCountry)
         {
+            if (ModelState.IsValid)
+            {
+                Country country = _countryService.Add(newCountry);
+                return PartialView();
+            }
+            else
+            {
+                Response.StatusCode = 418;
+                return PartialView("_CreateCountryPartial", newCountry);
+            }
 
+        }
 
-            return PartialView();
+        public IActionResult Find(int id)
+        {
+            Country country = _countryService.FindBy(id);
+            return View(country);
+        }
+
+        public IActionResult Update(CreateCountryViewModel editCountry)
+        {
+            Country country = _countryService.Edit(editCountry.Name, editCountry);
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Response.StatusCode = 400;
+                return PartialView();
+            }
+        }
+
+        public IActionResult Delete(int id)
+        {
+            if (_countryService.Remove(id))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Response.StatusCode = 400;
+                return View();
+            }
         }
     }
 }

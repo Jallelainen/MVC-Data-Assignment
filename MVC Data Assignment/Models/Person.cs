@@ -13,12 +13,24 @@ namespace MVC_Data_Assignment.Models
         public City City { get; set; }
 
         public Person () { }
+        public Person(string name, string phoneNum)
+        {
+            Name = name;
+            PhoneNum = phoneNum;
+        }
         public Person (string name, string phoneNum, City city) 
         {
             Name = name;
             PhoneNum = phoneNum;
             City = city;
         }
+        public Person(int id, string name, string phoneNum)
+        {
+            Id = id;
+            Name = name;
+            PhoneNum = phoneNum;
+        }
+
         public Person (int id, string name, string phoneNum, City city) : this (name, phoneNum, city) 
         {
             Id = id;

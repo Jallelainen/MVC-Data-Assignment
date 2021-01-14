@@ -14,5 +14,6 @@ namespace MVC_Data_Assignment.Models.Services
         Person Edit(int id, EditPersonViewModel people);
         bool Remove(int id);
         List<Person> Search(string search);
+        //List<Person> SearchCity(int id);
     }
 }

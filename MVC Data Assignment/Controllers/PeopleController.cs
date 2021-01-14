@@ -12,10 +12,13 @@ namespace MVC_Data_Assignment.Controllers
     public class PeopleController : Controller
     {
         private IPeopleService _peopleService;
+        private ICityService _cityService;
 
-        public PeopleController(IPeopleService peopleService)
+        public PeopleController(IPeopleService peopleService, ICityService cityService)
         {
             _peopleService = peopleService;
+            _cityService = cityService;
+
         }
 
         public IActionResult Index()
@@ -54,13 +57,13 @@ namespace MVC_Data_Assignment.Controllers
 
         public IActionResult Delete(int id)
         {
-            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
             Person person = _peopleService.FindBy(id);
 
             if (person != null)
             {
                 _peopleService.Remove(id);
-                peoplesViewModel.Msg = "Person Successfully Removed";
+                return RedirectToAction("Index");
+
 
             }
             else
@@ -68,14 +71,14 @@ namespace MVC_Data_Assignment.Controllers
                 return NotFound();
             }
 
-            return PartialView("_DeletePartial", peoplesViewModel); //Tried to insert a toast message but it just showed a blank space. 
         }
 
         [HttpGet]
         public IActionResult AjaxCreate()
         {
-            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
-            return PartialView("_CreatePartial", peoplesViewModel.CreatePerson);
+            CreatePersonViewModel createPersonViewModel = new CreatePersonViewModel();
+            createPersonViewModel.cities = _cityService.All();
+            return PartialView("_CreatePartial", createPersonViewModel);
         }
 
         [HttpPost]
@@ -96,11 +99,14 @@ namespace MVC_Data_Assignment.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
+
             Person person = _peopleService.FindBy(Id);
 
             if (person != null)
             {
-                return PartialView("_EditPersonPartial", person);
+                EditPersonViewModel editPerson = new EditPersonViewModel(Id, person);
+                editPerson.cities = _cityService.All();
+                return PartialView("_EditPersonPartial", editPerson);
             }
             else
             {
@@ -118,12 +124,12 @@ namespace MVC_Data_Assignment.Controllers
             {
                 _peopleService.Edit(id, editPersonViewModel);
 
-                return PartialView("_listItemPartial", person);
+                return RedirectToAction("Index");
 
             }
 
             Response.StatusCode = 400;
-            return PartialView("_EditPersonPartial", person);
+            return PartialView("_EditPersonPartial", editPersonViewModel);
         }
 
         public IActionResult Details(int id)

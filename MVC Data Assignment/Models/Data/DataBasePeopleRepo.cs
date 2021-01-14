@@ -16,12 +16,12 @@ namespace MVC_Data_Assignment.Models.Data
             _peopleDbContext = peopleDbContext;
         }
 
-        public Person Create(string name, string phoneNum, City city)
+        public Person Create(string name, string phoneNum)
         {
-            Person lastId = _peopleDbContext.PeopleList.Last();
+            Person lastId = _peopleDbContext.PeopleList.Last();//why?
             if (lastId != null)
             {
-                Person person = new Person(lastId.Id++, name, phoneNum, city);
+                Person person = new Person(lastId.Id++, name, phoneNum);
                 
                 _peopleDbContext.PeopleList.Add(person);
 
@@ -37,7 +37,7 @@ namespace MVC_Data_Assignment.Models.Data
             else
             {
                 int idCounter = 0;
-                Person person = new Person(idCounter++, name, phoneNum, city);
+                Person person = new Person(idCounter++, name, phoneNum);
 
                 _peopleDbContext.PeopleList.Add(person);
 

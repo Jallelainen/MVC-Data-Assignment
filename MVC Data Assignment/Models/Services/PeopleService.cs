@@ -18,7 +18,7 @@ namespace MVC_Data_Assignment.Models.Services
 
         public Person Add(CreatePersonViewModel createPersonViewModel)
         {
-            return _peopleRepo.Create(createPersonViewModel.Name, createPersonViewModel.PhoneNum, createPersonViewModel.City);
+            return _peopleRepo.Create(createPersonViewModel.Name, createPersonViewModel.PhoneNum);
         }
 
         public List<Person> All()
@@ -58,8 +58,7 @@ namespace MVC_Data_Assignment.Models.Services
 
             foreach (var item in All())
             {
-
-                if (item.Name.ToUpper().Contains(search.ToUpper()) || item.PhoneNum.Contains(search) || item.City.ToString().ToUpper().Contains(search.ToUpper())) //city.toString?
+                if (item.Name.ToUpper().Contains(search.ToUpper()) || item.PhoneNum.Contains(search) || item.City.Name.ToUpper().Contains(search.ToUpper())) //city.toString?
                 {
                     filterList.Add(item);
                 }
@@ -67,5 +66,19 @@ namespace MVC_Data_Assignment.Models.Services
 
             return filterList;
         }
+        //public List<Person> SearchCity(int id)
+        //{
+        //    List<Person> filterList = new List<Person>();
+
+        //    foreach (var item in All())
+        //    {
+        //        if (item.City.Id.ToString().Contains(id.ToString())) 
+        //        {
+        //            filterList.Add(item);
+        //        }
+        //    }
+
+        //    return filterList;
+        //}
     }
 }

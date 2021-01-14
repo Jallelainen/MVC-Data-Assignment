@@ -1,0 +1,36 @@
+﻿@model CreateCityViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>City Index</h1>
+
+<br />
+
+
+<div class="row">
+    <div class="col-4">
+        <a class="btn btn-secondary" asp-controller="City" asp-action="Create">Add City</a>
+    </div>
+    <div class="col-8">
+        <form asp-controller="City" asp-action="Search" method="post">
+            <div class="input-group mb-3">
+                <input class="form-control col" id="searchInput" asp-for="Search" placeholder="Search the list..." />
+                <div class="input-group-append">
+                    <button class="btn btn-success btn-sm" type="submit">Search</button>
+                    <button class="btn btn-danger btn-sm" Asp-controller="City" asp-action="ClearSearch">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="collapse" id="createEnviroment"></div>
+
+<div id="listAreaDiv">
+    <div class="btn-group btn-group">
+        <a class="btn btn-outline-primary" asp-controller="Country" asp-action="Index">Countries</a>
+        <a class="btn btn-outline-primary active">Cities</a>
+        <a class="btn btn-outline-primary" asp-controller="People" asp-action="Index">People</a>
+    </div>
+    <partial name="_CityListPartial" model="Model.cities" />
+</div>

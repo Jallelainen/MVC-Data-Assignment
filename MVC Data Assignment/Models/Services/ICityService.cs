@@ -11,7 +11,7 @@ namespace MVC_Data_Assignment.Models.Services
         City Add(CreateCityViewModel newCity);
         List<City> All();
         City FindBy(int id);
-        City Edit(int id, CreateCityViewModel editCityViewModel);
+        City Edit(City city);
         bool Remove(int id);
         List<City> Search(string search);
     }

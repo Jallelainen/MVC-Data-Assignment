@@ -1,24 +1,35 @@
-﻿@model Person
+﻿@model EditPersonViewModel
 
-<form id="editForm-@Model.Id" asp-controller="People" asp-action="Edit" method="post" onsubmit="PostEdit(event, this)">
+
+<form id="editForm-@Model.Id" asp-controller="People" asp-action="Edit" method="post">
+    <h3>Edit Person</h3>
     <div class="row">
         <div class="col">
+            <label class="mr-sm-0">Name:</label>
             <input asp-for="Name" class="form-control col" />
             <span asp-validation-for="Name" style="color: orangered"></span>
         </div>
         <div class="col">
+            <label class="mr-sm-0">Phone:</label>
             <input asp-for="PhoneNum" class="form-control col" />
             <span asp-validation-for="PhoneNum" style="color: orangered"></span>
         </div>
         <div class="col">
-            <input asp-for="City" class="form-control col" />
-            <span asp-validation-for="City" style="color: orangered"></span>
+            <label class="mr-sm-0">City:</label>
+            <select asp-for="City.Name" class="form-control col" >
+            @foreach (City item in Model.cities)
+            {
+                <option value="@item.Name">@item.Name</option>
+            }
+            </select>
+            <span asp-validation-for="City.Name" style="color: orangered"></span>
+            <a class="btn btn-primary" asp-controller="City" asp-action="Create" method="Get">Add</a>
         </div>
-        <div class="col">
-            <input type="submit" class="btn btn-outline-primary" asp-route-id="@Model.Id" value="Done" />
-            <a 
-               class="btn btn-outline-danger" asp-controller="People" asp-action="Delete" 
-               asp-route-id="@Model.Id" data-target="editForm-@Model.Id" onclick="AjaxDelete(event)">Remove</a>
+        <div class="col-4">
+            <input type="submit" class="btn btn-outline-primary" asp-route-id="@Model.Id" value="Done" style="transform: translateY(32px)"/>
+            <a class="btn btn-outline-danger" asp-controller="People" asp-action="Delete" 
+               asp-route-id="@Model.Id" data-target="@Model.Id" onclick="AjaxDelete(event)" style="transform: translateY(32px)">Remove</a>
+            <a class="btn btn-outline-secondary" asp-controller="People" asp-action="index" style="transform: translateY(32px)">Back</a>
         </div>
     </div>
 </form>

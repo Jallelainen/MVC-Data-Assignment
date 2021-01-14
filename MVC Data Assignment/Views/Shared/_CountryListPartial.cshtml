@@ -1,0 +1,18 @@
+﻿@model List<Country>
+
+<div class="row shadow-sm p-4 mb-4 bg-white">
+    <div class="col-12" id="countryListDiv">
+        <div class="row">
+            <div class="col-8">
+                <h4 class="border border-top-0 border-right-0">Name</h4>
+            </div>
+            <div class="col-4">
+                <h4 class="border border-top-0 border-right-0">Action</h4>
+            </div>
+        </div>
+        @foreach (Country item in Model)
+        {
+            <partial name="_CountryItemPartial" model="item" />
+        }
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿using MVC_Data_Assignment.Models.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_Data_Assignment.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace MVC_Data_Assignment.Models.Data
 
         public City Read(int id)
         {
-            return _peopleDbContext.CityList.SingleOrDefault(cityList => cityList.Id == id);
+            return _peopleDbContext.CityList.Include(c => c.CityPeopleList).SingleOrDefault(c => c.Id == id);
         }
 
         public List<City> Read()
