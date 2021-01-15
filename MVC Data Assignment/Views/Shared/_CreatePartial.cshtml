@@ -14,16 +14,21 @@
         <span asp-validation-for="PhoneNum" style="color: orangered"></span>
         <br />
         <label>City:</label>
-        <select asp-for="City.Id" class="form-control col">
-            <option disabled selected></option>
-            @foreach (City item in Model.cities)
-            {
-                <option value="@item.Id">@item.Name</option>
-            }
-        </select>   
-        <a class="btn btn-primary" asp-controller="City" asp-action="Create" method="Get">Add</a>
+        <div class="input-group mb-3">
+            <select asp-for="City.Id" class="form-control col">
+                <option disabled selected></option>
+                <option>None</option>
+                @foreach (City item in Model.cities)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            <div class="input-group-append">
+                <a class="btn btn-primary" asp-controller="City" asp-action="Create" method="Get">Add city</a>
+            </div>
+        </div>
         <br />
-        <input type="submit" class="btn btn-primary" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create Person" />
     </form>
 
 </div>

@@ -28,7 +28,14 @@ namespace MVC_Data_Assignment.Models.Services
 
         public Person Edit(int id, EditPersonViewModel person)
         {
-            Person editedPerson = new Person(id, person.Name, person.PhoneNum, person.City);
+            Person editedPerson = FindBy(id);
+
+            editedPerson.Name = person.Name;
+            editedPerson.PhoneNum = person.PhoneNum;
+            if (person.City != null)
+            {
+                editedPerson.City = person.City;
+            }
 
             return _peopleRepo.Update(editedPerson);
         }
