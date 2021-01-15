@@ -26,9 +26,9 @@ namespace MVC_Data_Assignment.Models.Services
             return _countryRepo.Read();
         }
 
-        public Country Edit(string name, CreateCountryViewModel country)
+        public Country Edit(Country country)
         {
-            Country editedCountry = new Country(name);
+            Country editedCountry = new Country(country.Name, country.CitiesList);
             return _countryRepo.Update(editedCountry);
         }
 

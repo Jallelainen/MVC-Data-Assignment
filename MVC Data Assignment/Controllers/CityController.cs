@@ -14,11 +14,13 @@ namespace MVC_Data_Assignment.Controllers
     {
         public ICityService _cityService;
         public IPeopleService _peopleService;
+        public ICountryService _countryService;
 
-        public CityController(ICityService cityService, IPeopleService peopleService)
+        public CityController(ICityService cityService, IPeopleService peopleService, ICountryService countryService)
         {
             _cityService = cityService;
             _peopleService = peopleService;
+            _countryService = countryService;
         }
 
 
@@ -36,7 +38,7 @@ namespace MVC_Data_Assignment.Controllers
             searchTerm.cities = _cityService.Search(searchTerm.Search);
             return View("Index", searchTerm);
         }
-        
+
         public IActionResult ClearSearch()
         {
             return RedirectToAction("Index");
@@ -55,6 +57,8 @@ namespace MVC_Data_Assignment.Controllers
         public ActionResult Create()
         {
             CreateCityViewModel createCityViewModel = new CreateCityViewModel();
+            createCityViewModel.CountryList = _countryService.All();
+
             return View("CreateCity", createCityViewModel);
         }
 
@@ -79,8 +83,19 @@ namespace MVC_Data_Assignment.Controllers
         // GET: CityController/Edit/5
         public ActionResult Edit(int id)
         {
+            CreateCityViewModel createCityViewModel = new CreateCityViewModel();
             City city = _cityService.FindBy(id);
-            return View(city);
+
+            createCityViewModel.CountryList = _countryService.All();
+            createCityViewModel.Id = id;
+            createCityViewModel.Name = city.Name;
+            if (city.Country != null)
+            {
+                createCityViewModel.Country = city.Country;
+            }
+
+
+            return View(createCityViewModel);
         }
 
         // POST: CityController/Edit/5
@@ -90,6 +105,10 @@ namespace MVC_Data_Assignment.Controllers
         {
             try
             {
+                if (createCityViewModel.Country != null)
+                {
+                    createCityViewModel.Country = _countryService.FindBy(createCityViewModel.Country.ID);
+                }
                 City city = new City(id, createCityViewModel.Name, createCityViewModel.Country, createCityViewModel.CityPeopleList);
 
                 _cityService.Edit(city);

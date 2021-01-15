@@ -9,8 +9,10 @@
 
 
 <div class="row">
-
-    <div class="col">
+    <div class="col-4">
+        <a class="btn btn-secondary btn-sm" asp-controller="Country" asp-action="Create">Add Country</a>
+    </div>
+    <div class="col-8">
         <form asp-controller="People" asp-action="Search" method="post" onsubmit="AjaxSearch(event, this)">
             <div class="input-group mb-3">
                 <input class="form-control col" id="searchInput" asp-for="Search" placeholder="Search the list..." />

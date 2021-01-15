@@ -1,0 +1,30 @@
+﻿@model Country
+
+<h1>Country Index</h1>
+
+<br />
+<div class="row">
+    <div class="col">
+        <h4 class="border border-top-0 border-right-0">@Model.Name</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h5>Cities in Country</h5>
+        <ol>
+            @foreach (City item in Model.CitiesList)
+            {
+                <li>
+                    <b>Name:</b><a asp-controller="City" asp-action="Details" asp-route-id="@item.Id"> @item.Name</a> <br />
+                </li>
+            }
+        </ol>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col">
+        <a class="btn btn-danger" asp-controller="Country" asp-action="Index">Back</a>
+    </div>
+</div>
+

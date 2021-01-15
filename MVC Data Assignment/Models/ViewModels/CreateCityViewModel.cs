@@ -8,7 +8,7 @@ namespace MVC_Data_Assignment.Models.ViewModels
 {
     public class CreateCityViewModel
     {
-        public int CityId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }

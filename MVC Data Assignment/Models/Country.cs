@@ -20,5 +20,10 @@ namespace MVC_Data_Assignment.Models
             Name = name;
             
         }
+        public Country (string name, List<City> citylist) : this (name)
+        {
+            CitiesList = citylist;
+            
+        }
     }
 }

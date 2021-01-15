@@ -1,0 +1,15 @@
+﻿@model CreateCountryViewModel
+
+<div class="row shadow-sm p-4 mb-4 bg-white">
+    <div class="col-12">
+        <form asp-controller="Country" asp-action="Create" method="post">
+            <h3 id="createPRSN">Add Country</h3>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control mr-sm-2" />
+            <span asp-validation-for="Name" style="color: orangered"></span>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Add Country" />
+            <button class="btn btn-secondary" asp-controller="Country" asp-action="Index" style="transform: translateY(-5px)">Back</button>
+        </form>
+    </div>
+</div>

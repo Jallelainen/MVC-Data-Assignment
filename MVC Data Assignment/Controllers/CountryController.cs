@@ -31,7 +31,7 @@ namespace MVC_Data_Assignment.Controllers
             Country country = new Country();
             country = _countryService.FindBy(id);
 
-            return PartialView("_CountryDetailPartial", country);
+            return View(country);
         }
 
         [HttpGet]
@@ -39,7 +39,7 @@ namespace MVC_Data_Assignment.Controllers
         {
             CreateCountryViewModel createCountryViewModel = new CreateCountryViewModel();
 
-            return PartialView("_CreateCountryPartial", createCountryViewModel);
+            return View(createCountryViewModel);
         }
 
         [HttpPost]
@@ -48,12 +48,12 @@ namespace MVC_Data_Assignment.Controllers
             if (ModelState.IsValid)
             {
                 Country country = _countryService.Add(newCountry);
-                return PartialView();
+                return RedirectToAction(nameof(Index));
             }
             else
             {
                 Response.StatusCode = 418;
-                return PartialView("_CreateCountryPartial", newCountry);
+                return View(newCountry);
             }
 
         }
@@ -66,20 +66,28 @@ namespace MVC_Data_Assignment.Controllers
 
         public IActionResult Update(CreateCountryViewModel editCountry)
         {
-            Country country = _countryService.Edit(editCountry.Name, editCountry);
+            
             if (ModelState.IsValid)
             {
+                Country country = _countryService.FindBy(editCountry.Id);
+                country.Name = editCountry.Name;
+                _countryService.Edit(country);
+
                 return RedirectToAction("Index");
             }
             else
             {
                 Response.StatusCode = 400;
-                return PartialView();
+                return View();
             }
         }
 
         public IActionResult Delete(int id)
         {
+            Country country = _countryService.FindBy(id);
+            country.CitiesList.Clear();
+            _countryService.Edit(country);
+
             if (_countryService.Remove(id))
             {
                 return RedirectToAction("Index");

@@ -1,32 +1,36 @@
 ﻿@model EditPersonViewModel
 
 
-<form id="editForm-@Model.Id" asp-controller="People" asp-action="Edit" method="post">
+<form class="col-12" id="editForm-@Model.Id" asp-controller="People" asp-action="Edit" method="post">
     <h3>Edit Person</h3>
     <div class="row">
-        <div class="col">
+        <div class="col-3">
             <label class="mr-sm-0">Name:</label>
             <input asp-for="Name" class="form-control col" />
             <span asp-validation-for="Name" style="color: orangered"></span>
         </div>
-        <div class="col">
+        <div class="col-3">
             <label class="mr-sm-0">Phone:</label>
             <input asp-for="PhoneNum" class="form-control col" />
             <span asp-validation-for="PhoneNum" style="color: orangered"></span>
         </div>
-        <div class="col">
+        <div class="col-3">
             <label class="mr-sm-0">City:</label>
-            <select asp-for="City.Id" class="form-control col">
-                <option disabled selected></option>
-                @foreach (City item in Model.cities)
-                {
-                    <option value="@item.Id">@item.Name</option>
-                }
-            </select>
-            <span asp-validation-for="City.Id" style="color: orangered"></span>
-            <a class="btn btn-primary" asp-controller="City" asp-action="Create" method="Get">Add</a>
+            <div class="input-group mb-3">
+                <select asp-for="City.Id" class="form-control col">
+                    <option disabled selected></option>
+                    <option>None</option>
+                    @foreach (City item in Model.cities)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <div class="input-group-append">
+                    <a class="btn btn-primary" asp-controller="City" asp-action="Create" method="Get">Add city</a>
+                </div>
+            </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <input type="submit" class="btn btn-outline-primary" asp-route-id="@Model.Id" value="Done" style="transform: translateY(32px)"/>
             <a class="btn btn-outline-danger" asp-controller="People" asp-action="Delete" 
                asp-route-id="@Model.Id" data-target="@Model.Id" onclick="AjaxDelete(event)" style="transform: translateY(32px)">Remove</a>

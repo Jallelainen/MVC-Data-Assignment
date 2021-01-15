@@ -55,7 +55,7 @@ namespace MVC_Data_Assignment.Models.Data
 
         public City Read(int id)
         {
-            return _peopleDbContext.CityList.Include(c => c.CityPeopleList).SingleOrDefault(c => c.Id == id);
+            return _peopleDbContext.CityList.Include(c => c.CityPeopleList).Include(c => c.Country).SingleOrDefault(c => c.Id == id);
         }
 
         public List<City> Read()

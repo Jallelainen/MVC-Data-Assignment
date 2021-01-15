@@ -1,15 +1,15 @@
 ﻿@model Country
 
-<div class="row" id="listItem-@Model.ID">
+<div class="row">
     <div class="col-8">
         <p>@Model.Name</p>
     </div>
     <div class="col-4">
-        <a class="btn btn-outline-warning" asp-controller="People" asp-action="Edit"
-           asp-route-id="@Model.ID" data-target="peopleListDiv" onclick="ShowEdit(event)">Edit</a>
-        <a class="btn btn-outline-danger" asp-controller="People" asp-action="Delete"
-           asp-route-id="@Model.ID" data-target="listItem-@Model.ID" onclick="AjaxDelete(event)">Remove</a>
-        <a class="btn btn-outline-info" asp-controller="People" asp-action="Details"
-           asp-route-id="@Model.ID" data-target="listItem-@Model.ID" onclick="ShowDetails(event)">Details</a>
+        <a class="btn btn-outline-warning" asp-controller="Country" asp-action="Edit"
+           asp-route-id="@Model.ID">Edit</a>
+        <a class="btn btn-outline-danger" asp-controller="Country" asp-action="Delete"
+           asp-route-id="@Model.ID">Remove</a>
+        <a class="btn btn-outline-info" asp-controller="Country" asp-action="Details"
+           asp-route-id="@Model.ID">Details</a>
     </div>
 </div>
