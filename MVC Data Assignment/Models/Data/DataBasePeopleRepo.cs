@@ -16,13 +16,13 @@ namespace MVC_Data_Assignment.Models.Data
             _peopleDbContext = peopleDbContext;
         }
 
-        public Person Create(string name, string phoneNum)
+        public Person Create(string name, string phoneNum, City city)
         {
-            Person lastId = _peopleDbContext.PeopleList.Last();//why?
-            if (lastId != null)
+            if (city != null)
             {
-                Person person = new Person(lastId.Id++, name, phoneNum);
-                
+
+                Person person = new Person(name, phoneNum, city);
+
                 _peopleDbContext.PeopleList.Add(person);
 
                 if (_peopleDbContext.SaveChanges() != 0)
@@ -36,8 +36,7 @@ namespace MVC_Data_Assignment.Models.Data
             }
             else
             {
-                int idCounter = 0;
-                Person person = new Person(idCounter++, name, phoneNum);
+                Person person = new Person(name, phoneNum);
 
                 _peopleDbContext.PeopleList.Add(person);
 
@@ -50,6 +49,9 @@ namespace MVC_Data_Assignment.Models.Data
                     return null;
                 }
             }
+
+
+
 
 
         }
@@ -90,26 +92,24 @@ namespace MVC_Data_Assignment.Models.Data
 
         public Person Update(Person person)
         {
-            Person originalPerson = Read(person.Id);
+            
 
-            if (originalPerson == null)
+            if (person == null)
             {
                 return null;
-            }
-
-            originalPerson.Name = person.Name;
-            originalPerson.PhoneNum = person.PhoneNum;
-            originalPerson.City = person.City;
-
-            _peopleDbContext.PeopleList.Update(originalPerson);
-
-            if (_peopleDbContext.SaveChanges() != 0)
-            {
-                return originalPerson;
             }
             else
             {
-                return null;
+                _peopleDbContext.PeopleList.Update(person);
+
+                if (_peopleDbContext.SaveChanges() != 0)
+                {
+                    return person;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }

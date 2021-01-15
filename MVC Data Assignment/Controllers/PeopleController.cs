@@ -84,16 +84,27 @@ namespace MVC_Data_Assignment.Controllers
         [HttpPost]
         public IActionResult AjaxCreatePost(CreatePersonViewModel createViewModel)
         {
+            PeoplesViewModel peoplesViewModel = new PeoplesViewModel();
+
 
             if (ModelState.IsValid)
             {
-                Person person = _peopleService.Add(createViewModel);
+                if (createViewModel.City != null)
+                {
+                    createViewModel.City = _cityService.FindBy(createViewModel.City.Id);
+                }
+                _peopleService.Add(createViewModel);
+                peoplesViewModel.peopleList = _peopleService.All();
+                return View("Index", peoplesViewModel);
+            }
+            else
+            {
+                Response.StatusCode = 400;
+                peoplesViewModel.peopleList = _peopleService.All();
+                return View("Index", peoplesViewModel);
 
-                return PartialView("_ListItemPartial", person);
             }
 
-            Response.StatusCode = 400;
-            return PartialView("_CreatePartial", createViewModel);
         }
 
         [HttpGet]
@@ -118,7 +129,11 @@ namespace MVC_Data_Assignment.Controllers
         [HttpPost]
         public IActionResult Edit(EditPersonViewModel editPersonViewModel, int id)
         {
-            Person person = _peopleService.FindBy(id);
+
+            if (editPersonViewModel.City != null)
+            {
+                editPersonViewModel.City = _cityService.FindBy(editPersonViewModel.City.Id);
+            }
 
             if (ModelState.IsValid)
             {

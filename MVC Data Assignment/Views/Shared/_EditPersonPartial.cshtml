@@ -16,13 +16,14 @@
         </div>
         <div class="col">
             <label class="mr-sm-0">City:</label>
-            <select asp-for="City.Name" class="form-control col" >
-            @foreach (City item in Model.cities)
-            {
-                <option value="@item.Name">@item.Name</option>
-            }
+            <select asp-for="City.Id" class="form-control col">
+                <option disabled selected></option>
+                @foreach (City item in Model.cities)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
             </select>
-            <span asp-validation-for="City.Name" style="color: orangered"></span>
+            <span asp-validation-for="City.Id" style="color: orangered"></span>
             <a class="btn btn-primary" asp-controller="City" asp-action="Create" method="Get">Add</a>
         </div>
         <div class="col-4">

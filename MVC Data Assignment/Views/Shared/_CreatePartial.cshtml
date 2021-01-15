@@ -3,7 +3,7 @@
 
 
 <div class="row shadow-sm p-4 mb-4 bg-white">
-    <form asp-controller="People" asp-action="AjaxCreatePost" method="post" onsubmit="PostCreate(event, this)">
+    <form asp-controller="People" asp-action="AjaxCreatePost" method="post">
         <h3 id="createPRSN">Create Person</h3>
         <label asp-for="Name"></label>
         <input asp-for="Name" class="form-control mr-sm-2" />
@@ -14,13 +14,13 @@
         <span asp-validation-for="PhoneNum" style="color: orangered"></span>
         <br />
         <label>City:</label>
-        <select asp-for="City.Name" class="form-control col">
+        <select asp-for="City.Id" class="form-control col">
+            <option disabled selected></option>
             @foreach (City item in Model.cities)
             {
-                <option value="@item.Name">@item.Name</option>
+                <option value="@item.Id">@item.Name</option>
             }
-        </select>
-        <span asp-validation-for="City.Name" style="color: orangered"></span>
+        </select>   
         <a class="btn btn-primary" asp-controller="City" asp-action="Create" method="Get">Add</a>
         <br />
         <input type="submit" class="btn btn-primary" value="Create" />

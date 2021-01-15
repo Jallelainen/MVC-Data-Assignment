@@ -7,7 +7,7 @@ namespace MVC_Data_Assignment.Models.Data
 {
     public interface IPeopleRepo
     {
-        Person Create(string name, string phoneNum);
+        Person Create(string name, string phoneNum, City city);
         List<Person> Read();
         Person Read(int id);
         Person Update(Person person);

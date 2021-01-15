@@ -10,7 +10,7 @@ namespace MVC_Data_Assignment.Models.Services
     public class PeopleService : IPeopleService
     {
         IPeopleRepo _peopleRepo;
-        
+
         public PeopleService(IPeopleRepo peopleRepo)
         {
             _peopleRepo = peopleRepo;
@@ -18,7 +18,7 @@ namespace MVC_Data_Assignment.Models.Services
 
         public Person Add(CreatePersonViewModel createPersonViewModel)
         {
-            return _peopleRepo.Create(createPersonViewModel.Name, createPersonViewModel.PhoneNum);
+            return _peopleRepo.Create(createPersonViewModel.Name, createPersonViewModel.PhoneNum, createPersonViewModel.City);
         }
 
         public List<Person> All()
@@ -26,10 +26,11 @@ namespace MVC_Data_Assignment.Models.Services
             return _peopleRepo.Read();
         }
 
-        public Person Edit(int id, EditPersonViewModel people)
+        public Person Edit(int id, EditPersonViewModel person)
         {
-            Person editedPeople = new Person( id, people.Name, people.PhoneNum, people.City);
-            return _peopleRepo.Update(editedPeople);
+            Person editedPerson = new Person(id, person.Name, person.PhoneNum, person.City);
+
+            return _peopleRepo.Update(editedPerson);
         }
 
         public Person FindBy(int id)
