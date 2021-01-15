@@ -70,13 +70,20 @@ namespace MVC_Data_Assignment.Controllers
 
             try
             {
+                if (createCity.Country != null)
+                {
+                    createCity.Country = _countryService.FindBy(createCity.Country.ID);
+
+                }
+
                 _cityService.Add(createCity);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
                 Response.StatusCode = 418;
-                return View();
+                createCity.CountryList = _countryService.All();
+                return View("CreateCity", createCity);
             }
         }
 
@@ -109,7 +116,9 @@ namespace MVC_Data_Assignment.Controllers
                 {
                     createCityViewModel.Country = _countryService.FindBy(createCityViewModel.Country.ID);
                 }
-                City city = new City(id, createCityViewModel.Name, createCityViewModel.Country, createCityViewModel.CityPeopleList);
+                City city = _cityService.FindBy(id);
+                city.Name = createCityViewModel.Name;
+                city.Country = createCityViewModel.Country;
 
                 _cityService.Edit(city);
                 return RedirectToAction(nameof(Index));

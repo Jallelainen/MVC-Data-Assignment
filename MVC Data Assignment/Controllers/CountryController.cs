@@ -64,6 +64,13 @@ namespace MVC_Data_Assignment.Controllers
             return View(country);
         }
 
+        public IActionResult Edit(int id)
+        {
+            
+            return View(_countryService.FindBy(id));
+        }
+
+        [HttpPost]
         public IActionResult Update(CreateCountryViewModel editCountry)
         {
             

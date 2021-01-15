@@ -18,6 +18,7 @@ namespace MVC_Data_Assignment.Models.Services
 
         public City Add(CreateCityViewModel newCity)
         {
+            
             return _cityRepo.Create(newCity.Name, newCity.Country, newCity.CityPeopleList);
         }
 
@@ -28,7 +29,11 @@ namespace MVC_Data_Assignment.Models.Services
 
         public City Edit(City city)
         {
-            City editedCity = new City(city.Id, city.Name, city.Country, city.CityPeopleList);
+            City editedCity = _cityRepo.Read(city.Id);
+            editedCity.Name = city.Name;
+            editedCity.Country = city.Country;
+            editedCity.CityPeopleList = city.CityPeopleList;
+
             return _cityRepo.Update(editedCity);
         }
 

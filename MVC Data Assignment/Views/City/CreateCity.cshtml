@@ -10,6 +10,7 @@
             <br />
             <label>Country:</label>
             <select asp-for="Country.ID" class="form-control col">
+                <option disabled selected>None</option>
                 @if (Model.CountryList != null)
                 {
                     @foreach (Country item in Model.CountryList)
