@@ -19,5 +19,6 @@ namespace MVC_Data_Assignment.Models.Database
         public DbSet<Person> PeopleList { get; set; } 
         public DbSet<City> CityList { get; set; } 
         public DbSet<Country> CountryList { get; set; } 
+        public DbSet<Language> Languages { get; set; }
     }
 }
