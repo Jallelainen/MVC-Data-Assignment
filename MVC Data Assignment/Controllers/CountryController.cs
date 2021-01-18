@@ -88,7 +88,7 @@ namespace MVC_Data_Assignment.Controllers
             Country country = _countryService.FindBy(id);
             if (country != null)
             {
-                return View();
+                return View(country);
             }
             else
             {
