@@ -58,12 +58,20 @@ namespace MVC_Data_Assignment.Models.Data
 
         public Language Read(int id)
         {
-            return _peopleDbContext.Languages.Include(l => l.Speakers).SingleOrDefault(l => l.Id == id);
+            return _peopleDbContext.Languages.Include(l => l.Speakers).ThenInclude(l => l.Person).SingleOrDefault(l => l.Id == id);
         }
 
         public Language Update(Language language)
         {
-            throw new NotImplementedException();
+            _peopleDbContext.Languages.Update(language);
+            if (_peopleDbContext.SaveChanges() != 0)
+            {
+                return language;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

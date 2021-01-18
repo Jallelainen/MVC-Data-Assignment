@@ -13,7 +13,7 @@ namespace MVC_Data_Assignment.Models
         public string Name { get; set; }
         public string PhoneNum { get; set; }
         public City City { get; set; }
-        public List<Language> Languages { get; set; }
+        public List<PersonLanguage> Languages { get; set; }
 
         public Person () { }
         public Person(string name, string phoneNum)

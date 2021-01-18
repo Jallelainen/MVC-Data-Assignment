@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Models.Data
 {
-    interface ILanguageRepo
+    public interface ILanguageRepo
     {
         Language Create(Language language);
         List<Language> Read();

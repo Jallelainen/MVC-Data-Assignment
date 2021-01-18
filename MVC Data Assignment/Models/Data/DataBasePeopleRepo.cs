@@ -87,7 +87,7 @@ namespace MVC_Data_Assignment.Models.Data
 
         public Person Read(int id)
         {
-            return _peopleDbContext.PeopleList.Include(p => p.City).SingleOrDefault(personList => personList.Id == id);
+            return _peopleDbContext.PeopleList.Include(p => p.City).Include(p => p.Languages).ThenInclude(p => p.Language).SingleOrDefault(personList => personList.Id == id);
         }
 
         public Person Update(Person person)

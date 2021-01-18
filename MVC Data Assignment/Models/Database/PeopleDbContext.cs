@@ -35,7 +35,7 @@ namespace MVC_Data_Assignment.Models.Database
             modelBuilder.Entity<PersonLanguage>()
                 .HasOne(pl => pl.Language)
                 .WithMany(l => l.Speakers)
-                .HasForeignKey(l => l.LanguageId);
+                .HasForeignKey(pl => pl.LanguageId);
         }
     }
 }
