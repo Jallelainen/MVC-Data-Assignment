@@ -134,6 +134,10 @@ namespace MVC_Data_Assignment.Controllers
             {
                 editPersonViewModel.City = _cityService.FindBy(editPersonViewModel.City.Id);
             }
+            else
+            {
+                return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
@@ -142,25 +146,39 @@ namespace MVC_Data_Assignment.Controllers
                 return RedirectToAction("Index");
 
             }
+            else
+            {
+                Response.StatusCode = 400;
+                return PartialView("_EditPersonPartial", editPersonViewModel);
+            }
 
-            Response.StatusCode = 400;
-            return PartialView("_EditPersonPartial", editPersonViewModel);
         }
 
         public IActionResult Details(int id)
         {
-            Person person = new Person();
-            person = _peopleService.FindBy(id);
+            Person person = _peopleService.FindBy(id);
+            if (person != null)
+            {
+                return PartialView("_PersonDetailPartial", person);
+            }
+            else
+            {
+                return NotFound();
+            }
 
-            return PartialView("_PersonDetailPartial", person);
         }
 
         public IActionResult CloseDetails(int id)
         {
-            Person person = new Person();
-            person = _peopleService.FindBy(id);
-
-            return PartialView("_ListItemPartial", person);
+            Person person = _peopleService.FindBy(id);
+            if (person != null)
+            {
+                return PartialView("_ListItemPartial", person);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

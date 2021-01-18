@@ -48,9 +48,15 @@ namespace MVC_Data_Assignment.Controllers
         public ActionResult Details(int id)
         {
             City city = _cityService.FindBy(id);
-            //city.CityPeopleList = _peopleService.SearchCity(city.Id);
+            if (city != null)
+            {
+                return View(city);
+            }
+            else
+            {
+                return NotFound();
+            }
 
-            return View(city);
         }
 
         // GET: CityController/Create
@@ -73,13 +79,24 @@ namespace MVC_Data_Assignment.Controllers
                 if (createCity.Country != null)
                 {
                     createCity.Country = _countryService.FindBy(createCity.Country.ID);
-
+                    City city = _cityService.Add(createCity);
+                    if (city != null)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                else
+                {
+                    return NotFound();
                 }
 
-                _cityService.Add(createCity);
-                return RedirectToAction(nameof(Index));
+
             }
-            catch (Exception e)
+            catch
             {
                 Response.StatusCode = 418;
                 createCity.CountryList = _countryService.All();
@@ -99,10 +116,14 @@ namespace MVC_Data_Assignment.Controllers
             if (city.Country != null)
             {
                 createCityViewModel.Country = city.Country;
+                return View(createCityViewModel);
+            }
+            else
+            {
+                return NotFound();
             }
 
 
-            return View(createCityViewModel);
         }
 
         // POST: CityController/Edit/5
@@ -115,13 +136,24 @@ namespace MVC_Data_Assignment.Controllers
                 if (createCityViewModel.Country != null)
                 {
                     createCityViewModel.Country = _countryService.FindBy(createCityViewModel.Country.ID);
-                }
-                City city = _cityService.FindBy(id);
-                city.Name = createCityViewModel.Name;
-                city.Country = createCityViewModel.Country;
+                    City city = _cityService.FindBy(id);
+                    if (city != null)
+                    {
+                        city.Name = createCityViewModel.Name;
+                        city.Country = createCityViewModel.Country;
 
-                _cityService.Edit(city);
-                return RedirectToAction(nameof(Index));
+                        _cityService.Edit(city);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             catch
             {
@@ -134,18 +166,25 @@ namespace MVC_Data_Assignment.Controllers
         public ActionResult Delete(int id)
         {
             City city = _cityService.FindBy(id);
-            city.CityPeopleList.Clear();
-            _cityService.Edit(city);
-
-            if (_cityService.Remove(id))
+            if (city != null)
             {
+                city.CityPeopleList.Clear();
+                _cityService.Edit(city);
 
-                return RedirectToAction(nameof(Index));
+                if (_cityService.Remove(id))
+                {
+
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    Response.StatusCode = 400;
+                    return View();
+                }
             }
             else
             {
-                Response.StatusCode = 400;
-                return View();
+                return NotFound();
             }
         }
     }
