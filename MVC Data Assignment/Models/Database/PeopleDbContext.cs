@@ -16,9 +16,26 @@ namespace MVC_Data_Assignment.Models.Database
 
 
         //DbSet
-        public DbSet<Person> PeopleList { get; set; } 
-        public DbSet<City> CityList { get; set; } 
-        public DbSet<Country> CountryList { get; set; } 
+        public DbSet<Person> PeopleList { get; set; }
+        public DbSet<City> CityList { get; set; }
+        public DbSet<Country> CountryList { get; set; }
         public DbSet<Language> Languages { get; set; }
+        public DbSet<PersonLanguage> PersonLanguage { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PersonLanguage>()
+                .HasKey(pl => new { pl.PersonId, pl.LanguageId } );
+
+            modelBuilder.Entity<PersonLanguage>()
+                .HasOne(pl => pl.Person)
+                .WithMany(p => p.Languages)
+                .HasForeignKey(pl => pl.PersonId);
+
+            modelBuilder.Entity<PersonLanguage>()
+                .HasOne(pl => pl.Language)
+                .WithMany(l => l.Speakers)
+                .HasForeignKey(l => l.LanguageId);
+        }
     }
 }

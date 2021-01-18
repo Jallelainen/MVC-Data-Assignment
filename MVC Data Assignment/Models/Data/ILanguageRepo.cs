@@ -11,6 +11,6 @@ namespace MVC_Data_Assignment.Models.Data
         List<Language> Read();
         Language Read(int id);
         Language Update(Language language);
-        bool delete(Language language);
+        bool Delete(Language language);
     }
 }
