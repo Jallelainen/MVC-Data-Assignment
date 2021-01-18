@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MVC_Data_Assignment.Models;
+using MVC_Data_Assignment.Models.Services;
+using MVC_Data_Assignment.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,49 +12,81 @@ namespace MVC_Data_Assignment.Controllers
 {
     public class LanguageController : Controller
     {
+        public ILanguageService _languageService;
+
+        public LanguageController(ILanguageService languageService)
+        {
+            _languageService = languageService;
+        }
+
         // GET: LanguageController
         public ActionResult Index()
         {
-            return View();
+            return View(_languageService.All());
         }
 
         // GET: LanguageController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Language language = _languageService.FindBy(id);
+            if (language != null)
+            {
+                return View(language);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // GET: LanguageController/Create
         public ActionResult Create()
         {
-            return View();
+            LanguageViewModel languageViewModel = new LanguageViewModel();
+            return View(languageViewModel);
         }
 
         // POST: LanguageController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(LanguageViewModel languageViewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Language language = _languageService.Add(languageViewModel);
+                if (language != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View(languageViewModel);
+                }
             }
             catch
             {
-                return View();
+                return View(languageViewModel);
             }
         }
 
         // GET: LanguageController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Language language = _languageService.FindBy(id);
+            if (language != null)
+            {
+                return View(language);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: LanguageController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, LanguageViewModel languageViewModel)
         {
             try
             {

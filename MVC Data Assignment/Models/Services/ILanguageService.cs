@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Models.Services
 {
-    interface ILanguageService
+    public interface ILanguageService
     {
         Language Add(LanguageViewModel languageViewModel);
         List<Language> All();

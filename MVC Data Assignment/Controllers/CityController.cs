@@ -109,14 +109,21 @@ namespace MVC_Data_Assignment.Controllers
         {
             CreateCityViewModel createCityViewModel = new CreateCityViewModel();
             City city = _cityService.FindBy(id);
-
-            createCityViewModel.CountryList = _countryService.All();
-            createCityViewModel.Id = id;
-            createCityViewModel.Name = city.Name;
-            if (city.Country != null)
+            if (city != null)
             {
-                createCityViewModel.Country = city.Country;
-                return View(createCityViewModel);
+
+                createCityViewModel.CountryList = _countryService.All();
+                createCityViewModel.Id = id;
+                createCityViewModel.Name = city.Name;
+                if (city.Country != null)
+                {
+                    createCityViewModel.Country = city.Country;
+                    return View(createCityViewModel);
+                }
+                else
+                {
+                    return View(createCityViewModel);
+                }
             }
             else
             {
