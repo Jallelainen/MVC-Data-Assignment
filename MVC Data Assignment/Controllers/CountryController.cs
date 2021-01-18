@@ -28,10 +28,15 @@ namespace MVC_Data_Assignment.Controllers
 
         public IActionResult Details(int id)
         {
-            Country country = new Country();
-            country = _countryService.FindBy(id);
-
-            return View(country);
+            Country country = _countryService.FindBy(id);
+            if (country != null)
+            {
+                return View(country);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet]
@@ -48,7 +53,14 @@ namespace MVC_Data_Assignment.Controllers
             if (ModelState.IsValid)
             {
                 Country country = _countryService.Add(newCountry);
-                return RedirectToAction(nameof(Index));
+                if (country != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             else
             {
@@ -61,48 +73,75 @@ namespace MVC_Data_Assignment.Controllers
         public IActionResult Find(int id)
         {
             Country country = _countryService.FindBy(id);
-            return View(country);
+            if (country != null)
+            {
+                return View(country);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         public IActionResult Edit(int id)
         {
-            
-            return View(_countryService.FindBy(id));
+            Country country = _countryService.FindBy(id);
+            if (country != null)
+            {
+                return View();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]
         public IActionResult Update(CreateCountryViewModel editCountry)
         {
-            
+
             if (ModelState.IsValid)
             {
                 Country country = _countryService.FindBy(editCountry.Id);
-                country.Name = editCountry.Name;
-                _countryService.Edit(country);
+                if (country != null)
+                {
+                    country.Name = editCountry.Name;
+                    _countryService.Edit(country);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             else
             {
-                Response.StatusCode = 400;
-                return View();
+
+                return NotFound();
             }
         }
 
         public IActionResult Delete(int id)
         {
             Country country = _countryService.FindBy(id);
-            country.CitiesList.Clear();
-            _countryService.Edit(country);
-
-            if (_countryService.Remove(id))
+            if (country != null)
             {
-                return RedirectToAction("Index");
+                country.CitiesList.Clear();
+                _countryService.Edit(country);
+
+                if (_countryService.Remove(id))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             else
             {
-                Response.StatusCode = 400;
-                return View();
+                return NotFound();
             }
         }
     }
