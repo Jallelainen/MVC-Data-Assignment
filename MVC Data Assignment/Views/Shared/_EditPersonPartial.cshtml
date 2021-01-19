@@ -20,7 +20,7 @@
                 <select asp-for="City.Id" class="form-control col">
                     <option disabled selected></option>
                     <option>None</option>
-                    @foreach (City item in Model.cities)
+                    @foreach (City item in Model.Cities)
                     {
                         <option value="@item.Id">@item.Name</option>
                     }
@@ -31,8 +31,26 @@
             </div>
         </div>
         <div class="col-3">
-            <input type="submit" class="btn btn-outline-primary" asp-route-id="@Model.Id" value="Done" style="transform: translateY(32px)"/>
-            <a class="btn btn-outline-danger" asp-controller="People" asp-action="Delete" 
+            <label>Language:</label>
+            <div class="input-group mb-3">
+                <select asp-for="Languages" class="form-control col">
+                    <option disabled selected></option>
+                    <option>None</option>
+                    @foreach (Language item in Model.PossibleLanguages)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <div class="input-group-append">
+                    <a class="btn btn-primary" asp-controller="Language" asp-action="Create" method="Get">Add Language</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="submit" class="btn btn-outline-primary" asp-route-id="@Model.Id" value="Done" style="transform: translateY(32px)" />
+            <a class="btn btn-outline-danger" asp-controller="People" asp-action="Delete"
                asp-route-id="@Model.Id" data-target="@Model.Id" onclick="AjaxDelete(event)" style="transform: translateY(32px)">Remove</a>
             <a class="btn btn-outline-secondary" asp-controller="People" asp-action="index" style="transform: translateY(32px)">Back</a>
         </div>

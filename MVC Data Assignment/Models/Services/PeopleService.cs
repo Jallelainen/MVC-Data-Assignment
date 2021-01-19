@@ -10,10 +10,12 @@ namespace MVC_Data_Assignment.Models.Services
     public class PeopleService : IPeopleService
     {
         IPeopleRepo _peopleRepo;
+        ILanguageRepo _languageRepo;
 
-        public PeopleService(IPeopleRepo peopleRepo)
+        public PeopleService(IPeopleRepo peopleRepo, ILanguageRepo languageRepo)
         {
             _peopleRepo = peopleRepo;
+            _languageRepo = languageRepo;
         }
 
         public Person Add(CreatePersonViewModel createPersonViewModel)
@@ -35,6 +37,11 @@ namespace MVC_Data_Assignment.Models.Services
             if (person.City != null)
             {
                 editedPerson.City = person.City;
+            }
+            if (person.Language != null)
+            {
+                
+                editedPerson.Languages = person.Languages;
             }
 
             return _peopleRepo.Update(editedPerson);

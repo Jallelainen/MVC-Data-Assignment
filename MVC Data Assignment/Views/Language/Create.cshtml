@@ -1,5 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model LanguageViewModel
+
+<div class="row shadow-sm p-4 mb-4 bg-white">
+    <div class="col-12">
+        <form asp-controller="Language" asp-action="Create" method="post">
+            <h3 id="createPRSN">Add Language</h3>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control mr-sm-2" />
+            <span asp-validation-for="Name" style="color: orangered"></span>
+            <br />
+            @*<label>Country:</label>
+            <select asp-for="Country.ID" class="form-control col">
+                <option disabled selected>None</option>
+                @if (Model.Countries != null)
+                {
+                    @foreach (Country item in Model.Countries)
+                    {
+                        <option value="@item.ID">@item.Name</option>
+                    }
+                }
+
+            </select>*@
+            <br />
+            <input type="submit" class="btn btn-primary" value="Add Language" />
+            <button class="btn btn-secondary" asp-controller="Language" asp-action="Index" style="transform: translateY(-5px)">Language Index</button>
+        </form>
+    </div>
+</div>

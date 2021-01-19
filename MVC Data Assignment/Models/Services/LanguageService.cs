@@ -51,10 +51,17 @@ namespace MVC_Data_Assignment.Models.Services
 
         public Language Edit(Language language)
         {
-            language = _languageRepo.Read(language.Id);
             if (language != null)
             {
-                return _languageRepo.Update(language);
+                Language oldLanguage = _languageRepo.Read(language.Id);
+                if (oldLanguage != null)
+                {
+                    return _languageRepo.Update(language);
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {

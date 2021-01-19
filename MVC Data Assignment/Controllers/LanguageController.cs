@@ -13,16 +13,20 @@ namespace MVC_Data_Assignment.Controllers
     public class LanguageController : Controller
     {
         public ILanguageService _languageService;
+        public ICountryService _countryService;
 
-        public LanguageController(ILanguageService languageService)
+        public LanguageController(ILanguageService languageService, ICountryService countryService)
         {
             _languageService = languageService;
+            _countryService = countryService;
         }
 
         // GET: LanguageController
         public ActionResult Index()
         {
-            return View(_languageService.All());
+            LanguageViewModel languageViewModel = new LanguageViewModel();
+            languageViewModel.Languages = _languageService.All();
+            return View(languageViewModel);
         }
 
         // GET: LanguageController/Details/5
@@ -43,6 +47,7 @@ namespace MVC_Data_Assignment.Controllers
         public ActionResult Create()
         {
             LanguageViewModel languageViewModel = new LanguageViewModel();
+            languageViewModel.Countries = _countryService.All();
             return View(languageViewModel);
         }
 
@@ -60,11 +65,13 @@ namespace MVC_Data_Assignment.Controllers
                 }
                 else
                 {
+                    languageViewModel.Countries = _countryService.All();
                     return View(languageViewModel);
                 }
             }
             catch
             {
+                languageViewModel.Countries = _countryService.All();
                 return View(languageViewModel);
             }
         }
@@ -90,33 +97,68 @@ namespace MVC_Data_Assignment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Language language = _languageService.FindBy(id);
+
+                if (languageViewModel.Country != null)
+                {
+                    language.Name = languageViewModel.Name;
+                    language.Country = languageViewModel.Country;
+
+                    if (_languageService.Edit(language) != null)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return View(languageViewModel);
+                    }
+                }
+                else
+                {
+                    language.Name = languageViewModel.Name;
+
+                    if (_languageService.Edit(language) != null)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return View(languageViewModel);
+                    }
+                }
+
             }
             catch
             {
-                return View();
+                return View(languageViewModel);
             }
         }
 
         // GET: LanguageController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Language language = _languageService.FindBy(id);
+            if (language != null)
+            {
+                language.Speakers.Clear();
+                _languageService.Edit(language);
+
+                if (_languageService.Remove(id))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
 
-        // POST: LanguageController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
     }
 }

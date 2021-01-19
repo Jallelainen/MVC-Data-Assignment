@@ -19,10 +19,13 @@ namespace MVC_Data_Assignment.Models.ViewModels
         [Display(Name = "Phone Number")]
         [RegularExpression("^[0-9]{1,13}$", ErrorMessage = "Must only use numbers.")]
         public string PhoneNum { get; set; }
+        public Language Language { get; set; }
 
         public City City { get; set; }
 
-        public List<City> cities { get; set; }
+        public List<City> Cities { get; set; }
+        public List<PersonLanguage> Languages { get; set; }
+        public List<Language> PossibleLanguages { get; set; }
 
 
         public EditPersonViewModel()
@@ -35,6 +38,15 @@ namespace MVC_Data_Assignment.Models.ViewModels
             Name = person.Name;
             PhoneNum = person.PhoneNum;
             City = person.City;
+        }
+
+        public EditPersonViewModel(int id, Person person, List<Language> languageList) : this (id, person)
+        {
+            foreach (var item in person.Languages)
+            {
+                languageList.Remove(item.Language);
+            }
+            PossibleLanguages = languageList;
         }
     }
 }

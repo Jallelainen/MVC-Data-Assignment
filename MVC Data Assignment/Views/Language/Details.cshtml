@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Language
+
+<h1>Country Index</h1>
+
+<br />
+<div class="row">
+    <div class="col">
+        <h4 class="border border-top-0 border-right-0">@Model.Name</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h5>Language Speakers</h5>
+        <ol>
+            @foreach (PersonLanguage item in Model.Speakers)
+            {
+                <li>
+                    <b>Name:</b><p> @item.Person.Name</p> <br />
+                </li>
+            }
+        </ol>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col">
+        <a class="btn btn-danger" asp-controller="Country" asp-action="Index">Back</a>
+    </div>
+</div>

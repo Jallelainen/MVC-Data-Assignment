@@ -13,6 +13,7 @@ namespace MVC_Data_Assignment.Models.ViewModels
         public string Search { get; set; }
         public Country Country { get; set; }
         public List<Country> Countries { get; set; }
+        public List<Language> Languages { get; set; }
         List<Person> People { get; set; }
     }
 }

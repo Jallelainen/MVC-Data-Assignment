@@ -13,11 +13,13 @@ namespace MVC_Data_Assignment.Controllers
     {
         private IPeopleService _peopleService;
         private ICityService _cityService;
+        private ILanguageService _languageService;
 
-        public PeopleController(IPeopleService peopleService, ICityService cityService)
+        public PeopleController(IPeopleService peopleService, ICityService cityService, ILanguageService languageService)
         {
             _peopleService = peopleService;
             _cityService = cityService;
+            _languageService = languageService;
 
         }
 
@@ -115,8 +117,8 @@ namespace MVC_Data_Assignment.Controllers
 
             if (person != null)
             {
-                EditPersonViewModel editPerson = new EditPersonViewModel(Id, person);
-                editPerson.cities = _cityService.All();
+                EditPersonViewModel editPerson = new EditPersonViewModel(Id, person, _languageService.All());
+                editPerson.Cities = _cityService.All();
                 return PartialView("_EditPersonPartial", editPerson);
             }
             else
