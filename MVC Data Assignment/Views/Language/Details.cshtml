@@ -1,6 +1,6 @@
 ﻿@model Language
 
-<h1>Country Index</h1>
+<h1>Language Index</h1>
 
 <br />
 <div class="row">
@@ -15,7 +15,7 @@
             @foreach (PersonLanguage item in Model.Speakers)
             {
                 <li>
-                    <b>Name:</b><p> @item.Person.Name</p> <br />
+                    <p><b>Name:</b> @item.Person.Name</p>
                 </li>
             }
         </ol>
@@ -24,6 +24,6 @@
 </div>
 <div class="row">
     <div class="col">
-        <a class="btn btn-danger" asp-controller="Country" asp-action="Index">Back</a>
+        <a class="btn btn-danger" asp-controller="Language" asp-action="Index">Back</a>
     </div>
 </div>

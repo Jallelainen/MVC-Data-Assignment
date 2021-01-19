@@ -5,7 +5,8 @@
         <p>@Model.Name</p>
     </div>
     <div class="col">
-        <p><b>Phone:</b> @Model.PhoneNum</p>
+        <b>Phone:</b>
+        <p> @Model.PhoneNum</p>
     </div>
     <div class="col">
         @if (Model.City == null)
@@ -14,10 +15,12 @@
         }
         else
         {
-            <p><b>City:</b> @Model.City.Name</p>
+            <b>City:</b>
+            <p> @Model.City.Name</p>
         }
     </div>
     <div class="col">
+        <b>Languages:</b>
         <ul>
             @foreach (PersonLanguage item in Model.Languages)
             {

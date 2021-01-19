@@ -38,10 +38,10 @@ namespace MVC_Data_Assignment.Models.Services
             {
                 editedPerson.City = person.City;
             }
-            if (person.Language != null)
+            if (person.PersonLanguage != null)
             {
-                
-                editedPerson.Languages = person.Languages;
+                person.PersonLanguage.Language = _languageRepo.Read(person.PersonLanguage.Language.Id);
+                editedPerson.Languages.Add(person.PersonLanguage);
             }
 
             return _peopleRepo.Update(editedPerson);

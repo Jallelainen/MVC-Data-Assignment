@@ -19,7 +19,7 @@ namespace MVC_Data_Assignment.Models.ViewModels
         [Display(Name = "Phone Number")]
         [RegularExpression("^[0-9]{1,13}$", ErrorMessage = "Must only use numbers.")]
         public string PhoneNum { get; set; }
-        public Language Language { get; set; }
+        public PersonLanguage PersonLanguage { get; set; }
 
         public City City { get; set; }
 
