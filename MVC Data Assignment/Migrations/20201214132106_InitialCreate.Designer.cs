@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVC_Data_Assignment.Migrations
 {
-    [DbContext(typeof(PeopleDbContext))]
+    [DbContext(typeof(IdentityPersonDbContext))]
     [Migration("20201214132106_InitialCreate")]
     partial class InitialCreate
     {

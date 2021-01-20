@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVC_Data_Assignment.Models.Data;
 using MVC_Data_Assignment.Models.Database;
+using MVC_Data_Assignment.Models.Identity;
 using MVC_Data_Assignment.Models.Services;
 
 namespace MVC_Data_Assignment
@@ -27,13 +29,18 @@ namespace MVC_Data_Assignment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PeopleDbContext>(options => 
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityPersonDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddDbContext<IdentityPersonDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IPeopleService, PeopleService>();// container setting for IoC
             services.AddScoped<ICityService, CityService>();// container setting for IoC
             services.AddScoped<ICountryService, CountryService>();// container setting for IoC
             services.AddScoped<ILanguageService, LanguageService>();// container setting for IoC
+
             services.AddScoped<IPeopleRepo, DataBasePeopleRepo>();// container setting for IoC
             services.AddScoped<ICityRepo, DBCityRepo>();// container setting for IoC
             services.AddScoped<ICountryRepo, DBCountryRepo>();// container setting for IoC
@@ -51,13 +58,16 @@ namespace MVC_Data_Assignment
             }
             else
             {
-               
+
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication(); //login
+            app.UseAuthorization(); //role
 
             app.UseEndpoints(endpoints =>
             {

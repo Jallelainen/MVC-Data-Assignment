@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using MVC_Data_Assignment.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +8,9 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Models.Database
 {
-    public class PeopleDbContext : DbContext
+    public class IdentityPersonDbContext : IdentityDbContext<AppUser>
     {
-        //ctor
-        public PeopleDbContext(DbContextOptions<PeopleDbContext> options) : base(options)
-        {
-
-        }
-
+        public IdentityPersonDbContext(DbContextOptions<IdentityPersonDbContext> options) : base(options) {}
 
         //DbSet
         public DbSet<Person> PeopleList { get; set; }
@@ -24,8 +21,10 @@ namespace MVC_Data_Assignment.Models.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<PersonLanguage>()
-                .HasKey(pl => new { pl.PersonId, pl.LanguageId } );
+                .HasKey(pl => new { pl.PersonId, pl.LanguageId });
 
             modelBuilder.Entity<PersonLanguage>()
                 .HasOne(pl => pl.Person)

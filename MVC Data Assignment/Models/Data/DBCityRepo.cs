@@ -9,9 +9,9 @@ namespace MVC_Data_Assignment.Models.Data
 {
     public class DBCityRepo : ICityRepo
     {
-        private readonly PeopleDbContext _peopleDbContext;
+        private readonly IdentityPersonDbContext _peopleDbContext;
 
-        public DBCityRepo(PeopleDbContext peopleDbContext)
+        public DBCityRepo(IdentityPersonDbContext peopleDbContext)
         {
             _peopleDbContext = peopleDbContext;
         }

@@ -9,9 +9,9 @@ namespace MVC_Data_Assignment.Models.Data
 {
     public class DBLanguageRepo : ILanguageRepo
     {
-        private readonly PeopleDbContext _peopleDbContext;
+        private readonly IdentityPersonDbContext _peopleDbContext;
 
-        public DBLanguageRepo(PeopleDbContext peopleDbContext)
+        public DBLanguageRepo(IdentityPersonDbContext peopleDbContext)
         {
             _peopleDbContext = peopleDbContext;
         }
