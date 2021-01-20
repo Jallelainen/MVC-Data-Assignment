@@ -11,6 +11,8 @@
            asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="AjaxDelete(event)">Remove</a>
         <a class="btn btn-outline-info" asp-controller="People" asp-action="Details"
            asp-route-id="@Model.Id" data-target="listItem-@Model.Id" onclick="ShowDetails(event)">Details</a>
+        <a class="btn btn-outline-info" asp-controller="People" asp-action="ManageLang"
+           asp-route-id="@Model.Id">Languages</a>
     </div>
 </div>
 

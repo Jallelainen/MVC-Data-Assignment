@@ -34,8 +34,7 @@
             <label>Language:</label>
             <div class="input-group mb-3">
                 <select asp-for="PersonLanguage.Language.Id" class="form-control col">
-                    <option disabled selected></option>
-                    <option>None</option>
+                    <option disabled selected>None</option>
                     @foreach (Language item in Model.PossibleLanguages)
                     {
                         <option value="@item.Id">@item.Name</option>

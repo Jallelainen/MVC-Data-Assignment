@@ -1,0 +1,35 @@
+﻿@model Person
+
+<h1>Person Index</h1>
+
+<br />
+<div class="row">
+    <div class="col">
+        <h4 class="border border-top-0 border-right-0">@Model.Name</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h5>Manage Languages</h5>
+        @foreach (PersonLanguage item in Model.Languages)
+        {
+
+            <div class="row">
+                <div class="col">
+                    <p>@item.Language.Name</p>
+                </div>
+                <div class="col-4">
+                    <b>@Html.ActionLink("Remove", "RemoveLang", "People", new { personId = Model.Id, languageId = item.Language.Id })</b>
+                </div>
+            </div>
+
+        }
+    </div>
+
+</div>
+<br />
+<div class="row">
+    <div class="col">
+        <a class="btn btn-danger" asp-controller="People" asp-action="Index">Back to Index</a>
+    </div>
+</div>

@@ -123,7 +123,7 @@ namespace MVC_Data_Assignment.Controllers
             }
             else
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
 
         }
@@ -150,8 +150,7 @@ namespace MVC_Data_Assignment.Controllers
             }
             else
             {
-                Response.StatusCode = 400;
-                return PartialView("_EditPersonPartial", editPersonViewModel);
+                return RedirectToAction(nameof(Index));
             }
 
         }
@@ -181,6 +180,38 @@ namespace MVC_Data_Assignment.Controllers
             {
                 return NotFound();
             }
+        }
+
+        public IActionResult ManageLang(int id)
+        {
+            Person person = _peopleService.FindBy(id);
+            if (person != null)
+            {
+                return View(person);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        public IActionResult RemoveLang(int personId, int languageId)
+        {
+            Person person = _peopleService.FindBy(personId);
+            if (person != null)
+            {
+                foreach (var item in person.Languages)
+                {
+                    if (item.LanguageId == languageId)
+                    {
+                        person.Languages.Remove(item);
+                        _peopleService.Edit(personId, new EditPersonViewModel(person));
+                        break;
+                    }
+                }
+                return RedirectToAction(nameof(ManageLang), new { id = personId });
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

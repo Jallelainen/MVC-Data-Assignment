@@ -32,16 +32,18 @@ namespace MVC_Data_Assignment.Models.ViewModels
         {
 
         }
-        public EditPersonViewModel(int id, Person person)
+        public EditPersonViewModel(Person person)
         {
-            Id = id;
+            
             Name = person.Name;
             PhoneNum = person.PhoneNum;
             City = person.City;
         }
 
-        public EditPersonViewModel(int id, Person person, List<Language> languageList) : this (id, person)
+        public EditPersonViewModel(int id, Person person, List<Language> languageList) : this (person)
         {
+            Id = id;
+
             foreach (var item in person.Languages)
             {
                 languageList.Remove(item.Language);

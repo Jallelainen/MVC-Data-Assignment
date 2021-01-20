@@ -50,10 +50,6 @@ namespace MVC_Data_Assignment.Models.Data
                 }
             }
 
-
-
-
-
         }
 
         public bool Delete(Person person)
