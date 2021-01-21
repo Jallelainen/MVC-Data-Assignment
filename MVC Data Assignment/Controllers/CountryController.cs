@@ -11,7 +11,7 @@ namespace MVC_Data_Assignment.Controllers
 {
     public class CountryController : Controller
     {
-        private ICountryService _countryService;
+        private readonly ICountryService _countryService;
 
         public CountryController(ICountryService countryService)
         {

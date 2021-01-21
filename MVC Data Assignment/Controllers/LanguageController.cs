@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MVC_Data_Assignment.Models;
 using MVC_Data_Assignment.Models.Services;
@@ -10,10 +11,11 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Controllers
 {
+    [Authorize]
     public class LanguageController : Controller
     {
-        public ILanguageService _languageService;
-        public ICountryService _countryService;
+        private readonly ILanguageService _languageService;
+        private readonly ICountryService _countryService;
 
         public LanguageController(ILanguageService languageService, ICountryService countryService)
         {

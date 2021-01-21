@@ -11,9 +11,9 @@ namespace MVC_Data_Assignment.Controllers
 {
     public class PeopleController : Controller
     {
-        private IPeopleService _peopleService;
-        private ICityService _cityService;
-        private ILanguageService _languageService;
+        private readonly IPeopleService _peopleService;
+        private readonly ICityService _cityService;
+        private readonly ILanguageService _languageService;
 
         public PeopleController(IPeopleService peopleService, ICityService cityService, ILanguageService languageService)
         {

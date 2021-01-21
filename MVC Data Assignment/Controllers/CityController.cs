@@ -12,9 +12,9 @@ namespace MVC_Data_Assignment.Controllers
 {
     public class CityController : Controller
     {
-        public ICityService _cityService;
-        public IPeopleService _peopleService;
-        public ICountryService _countryService;
+        private readonly ICityService _cityService;
+        private readonly IPeopleService _peopleService;
+        private readonly ICountryService _countryService;
 
         public CityController(ICityService cityService, IPeopleService peopleService, ICountryService countryService)
         {

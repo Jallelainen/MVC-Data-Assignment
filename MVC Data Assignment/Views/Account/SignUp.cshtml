@@ -1,0 +1,20 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<h1>SignUp</h1>
+
+
+@if (Model.NoticeMessage != null)
+{
+    <h4 style="color: orangered">@Model.NoticeMessage</h4>
+}
+
+<form asp-action="SignUp" method="post">
+    <input type="text" asp-for="UserName" value="" />
+    <input type="password" asp-for="Password" value="" />
+
+    <input type="submit" value="Sign Up" class="btn btn-success" />
+</form> 
