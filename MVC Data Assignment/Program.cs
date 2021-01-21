@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MVC_Data_Assignment.Models.Database;
 
 namespace MVC_Data_Assignment
 {
@@ -13,7 +14,9 @@ namespace MVC_Data_Assignment
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build(); // creates webserver host
+            host = SeedDataBase.CreateDataBaseIfNotExists(host); // seed if needed
+            host.Run(); // run webserver
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

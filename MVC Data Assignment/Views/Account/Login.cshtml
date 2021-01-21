@@ -12,8 +12,15 @@
 }
 
 <form asp-action="Login" method="post">
+    <label asp-for="UserName"></label>
+    <br />
     <input type="text" asp-for="UserName" value="" />
+    <span class="text-danger" asp-validation-for="UserName"></span>
+    <br />
+    <label asp-for="Password"></label>
+    <br />
     <input type="password" asp-for="Password" value="" />
-
-    <input type="submit" value="Login" class="btn btn-success" />
+    <span class="text-danger" asp-validation-for="Password"></span>
+    <br />
+    <input type="submit" value="Login" class="btn-sm mt-4 btn-success" />
 </form> 

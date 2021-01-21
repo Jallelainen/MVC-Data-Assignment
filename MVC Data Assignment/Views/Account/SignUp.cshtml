@@ -1,4 +1,4 @@
-﻿@model LoginViewModel
+﻿@model SignUpViewModel
 
 @{
     ViewData["Title"] = "SignUp";
@@ -13,8 +13,35 @@
 }
 
 <form asp-action="SignUp" method="post">
+    <label asp-for="FirstName"></label>
+    <br />
+    <input type="text" asp-for="FirstName" value="" />
+    <span class="text-danger" asp-validation-for="FirstName"></span>
+    <br />
+    <label asp-for="LastName"></label>
+    <br />
+    <input type="text" asp-for="LastName" value="" />
+    <span class="text-danger" asp-validation-for="LastName"></span>
+    <br />
+    <label asp-for="BirthDate"></label>
+    <br />
+    <input type="text" asp-for="BirthDate" value="" />
+    <span class="text-danger" asp-validation-for="BirthDate"></span>
+    <br />
+    <label asp-for="UserName"></label>
+    <br />
     <input type="text" asp-for="UserName" value="" />
+    <span class="text-danger" asp-validation-for="UserName"></span>
+    <br />
+    <label asp-for="Password"></label>
+    <br />
     <input type="password" asp-for="Password" value="" />
-
-    <input type="submit" value="Sign Up" class="btn btn-success" />
+    <span class="text-danger" asp-validation-for="Password"></span>
+    <br />
+    <label asp-for="ControlPassword"></label>
+    <br />
+    <input type="password" asp-for="ControlPassword" value="" />
+    <span class="text-danger" asp-validation-for="ControlPassword"></span>
+    <br />
+    <input type="submit" value="Sign Up" class="btn-sm mt-4 btn-success" />
 </form> 

@@ -24,7 +24,6 @@ namespace MVC_Data_Assignment.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public IActionResult Login()
         {
             LoginViewModel loginViewModel = new LoginViewModel();
@@ -33,55 +32,71 @@ namespace MVC_Data_Assignment.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, false, false);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    loginViewModel.NoticeMessage = "Failed to login";
+                    return View(loginViewModel);
+                }
             }
-            //else if (result.IsLockedOut)
-            //{
+            else
+            {
+                loginViewModel.NoticeMessage = "Failed to login";
+                return View(loginViewModel);
+            } 
 
-            //}
-
-            loginViewModel.NoticeMessage = "Failed to login";
-            return View();
         }
 
         [AllowAnonymous]
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public IActionResult SignUp()
         {
-            LoginViewModel loginViewModel = new LoginViewModel();
-            return View(loginViewModel);
+            SignUpViewModel signUpViewModel = new SignUpViewModel();
+            return View(signUpViewModel);
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> SignUp(LoginViewModel loginViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SignUp(SignUpViewModel signUpViewModel)
         {
             if (ModelState.IsValid)
             {
                 AppUser appUser = new AppUser();
-                appUser.UserName = loginViewModel.UserName;
-                var result = await _userManager.CreateAsync(appUser, loginViewModel.Password);
+                appUser.UserName = signUpViewModel.UserName;
+                var result = await _userManager.CreateAsync(appUser, signUpViewModel.Password);
 
                 if (result.Succeeded)
                 {
-
+                    return RedirectToAction(nameof(Login));
                 }
                 else
                 {
-                    loginViewModel.NoticeMessage = "Failed to create new account";
-                    return View();
+                    signUpViewModel.NoticeMessage = "Failed to create new account";
+                    return View(signUpViewModel);
                 }
             }
 
-            loginViewModel.NoticeMessage = "Failed to create new account";
-            return View();
+            signUpViewModel.NoticeMessage = "Failed to create new account";
+            return View(signUpViewModel);
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+
     }
 }
