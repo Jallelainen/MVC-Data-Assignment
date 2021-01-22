@@ -20,9 +20,13 @@ namespace MVC_Data_Assignment.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_userManager.Users.ToList());
+            AppUser appUser = await _userManager.FindByNameAsync("Deus");
+            List<AppUser> users = _userManager.Users.ToList();
+            users.Remove(appUser);
+
+            return View(users);
         }
 
         public async Task<IActionResult> AddAdmin(string id)
@@ -30,15 +34,14 @@ namespace MVC_Data_Assignment.Controllers
             AppUser appUser = await _userManager.FindByIdAsync(id);
             if (appUser != null)
             {
+                var removeResult = await _userManager.RemoveFromRoleAsync(appUser, "Subject");
                 var result = await _userManager.AddToRoleAsync(appUser, "Imperator");
                 if (result != null)
                 {
-                    ViewBag.Msg = "Operation Succeeded, Admin Added";
                     return RedirectToAction("Index");
                 }
             }
 
-            ViewBag.Msg = "Operation Failed";
             return RedirectToAction("Index");
 
         }
@@ -49,14 +52,15 @@ namespace MVC_Data_Assignment.Controllers
             if (appUser != null && appUser.UserName != "Deus")
             {
                 var result = await _userManager.RemoveFromRoleAsync(appUser, "Imperator");
+                var addResult = await _userManager.AddToRoleAsync(appUser, "Subject");
                 if (result != null)
                 {
-                    ViewBag.Msg = "Operation Succeeded, Admin Removed";
+
                     return RedirectToAction("Index");
                 }
             }
 
-            ViewBag.Msg = "Operation Failed";
+
             return RedirectToAction("Index");
 
         }
