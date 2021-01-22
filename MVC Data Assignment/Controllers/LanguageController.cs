@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Imperator")]
     public class LanguageController : Controller
     {
         private readonly ILanguageService _languageService;

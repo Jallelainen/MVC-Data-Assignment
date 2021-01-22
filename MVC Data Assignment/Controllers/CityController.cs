@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MVC_Data_Assignment.Models;
 using MVC_Data_Assignment.Models.Services;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Controllers
 {
+    [Authorize(Roles = "Imperator")]
     public class CityController : Controller
     {
         private readonly ICityService _cityService;

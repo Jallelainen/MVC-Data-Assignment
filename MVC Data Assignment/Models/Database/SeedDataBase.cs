@@ -31,18 +31,17 @@ namespace MVC_Data_Assignment.Models.Database
 
                         var userManager = services.GetRequiredService<UserManager<AppUser>>();
 
-                        AppUser Deus = new AppUser() { UserName = "Deus" };
+                        AppUser deus = new AppUser() { UserName = "Deus" };
 
-                        userManager.CreateAsync(Deus, "Qwerty!23456").Wait();
+                        userManager.CreateAsync(deus, "Qwerty!23456").Wait();
 
-                        Deus = userManager.FindByNameAsync("Deus").Result;
+                        deus = userManager.FindByNameAsync("Deus").Result;
 
-                        userManager.AddToRoleAsync(Deus, "Imperator").Wait();
+                        userManager.AddToRoleAsync(deus, "Imperator").Wait();
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.Write(e);
                     throw;
                 }
 

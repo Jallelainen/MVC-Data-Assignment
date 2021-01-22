@@ -9,9 +9,10 @@ namespace MVC_Data_Assignment.Models.Identity
     public class AppUser : IdentityUser
     {
         //need something more to the user, here be the place
-        //public int BirthDate { get; set; }
-        //public string FirstName { get; set; }
-        //public string LastName { get; set; }
+
+        public DateTime BirthDate { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public AppUser()
         {

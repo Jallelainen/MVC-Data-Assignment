@@ -74,10 +74,15 @@ namespace MVC_Data_Assignment.Controllers
             {
                 AppUser appUser = new AppUser();
                 appUser.UserName = signUpViewModel.UserName;
+                appUser.FirstName = signUpViewModel.FirstName;
+                appUser.LastName = signUpViewModel.LastName;
+                appUser.BirthDate = signUpViewModel.BirthDate
+                    ;
                 var result = await _userManager.CreateAsync(appUser, signUpViewModel.Password);
 
                 if (result.Succeeded)
                 {
+                    var roleResult = await _userManager.AddToRoleAsync(appUser, "Subject");
                     return RedirectToAction(nameof(Login));
                 }
                 else

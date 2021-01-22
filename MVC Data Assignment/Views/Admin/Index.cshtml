@@ -1,0 +1,45 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User Index</h1>
+
+@if (ViewBag.Msg != null)
+{
+    if (ViewBag.Msg.Contains("Failed"))
+    {
+        <h4 style="color: orangered">@ViewBag.Msg</h4>
+    }
+    else
+    {
+        <h4 style="color: green">@ViewBag.Msg</h4>
+    }
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Access</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.AccessFailedCount</td>
+                <td>
+                    @Html.ActionLink("Add to Admin", "AddAdmin", "Admin", new { id = item.Id })
+                    @Html.ActionLink("Remove from Admin", "RemoveAdmin", "Admin", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+

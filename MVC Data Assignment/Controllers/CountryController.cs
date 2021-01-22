@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVC_Data_Assignment.Models;
 using MVC_Data_Assignment.Models.Services;
 using MVC_Data_Assignment.Models.ViewModels;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Controllers
 {
+    [Authorize(Roles = "Imperator")]
     public class CountryController : Controller
     {
         private readonly ICountryService _countryService;

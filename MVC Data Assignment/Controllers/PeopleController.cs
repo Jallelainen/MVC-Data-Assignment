@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC_Data_Assignment.Models;
 using MVC_Data_Assignment.Models.Services;
@@ -9,6 +10,7 @@ using MVC_Data_Assignment.Models.ViewModels;
 
 namespace MVC_Data_Assignment.Controllers
 {
+    [Authorize(Roles = "Subject, Imperator")]
     public class PeopleController : Controller
     {
         private readonly IPeopleService _peopleService;

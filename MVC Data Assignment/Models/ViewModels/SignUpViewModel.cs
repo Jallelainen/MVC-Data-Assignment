@@ -26,7 +26,7 @@ namespace MVC_Data_Assignment.Models.ViewModels
 
         [Required]
         [DataType(DataType.Date)]
-        public int BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         [Required]
         public string FirstName { get; set; }
