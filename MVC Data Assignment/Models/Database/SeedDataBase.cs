@@ -40,7 +40,7 @@ namespace MVC_Data_Assignment.Models.Database
                         userManager.AddToRoleAsync(deus, "Imperator").Wait();
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw;
                 }

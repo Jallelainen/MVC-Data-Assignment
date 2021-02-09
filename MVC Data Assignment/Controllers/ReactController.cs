@@ -17,11 +17,12 @@ namespace MVC_Data_Assignment.Controllers
         private readonly ICityService _cityService;
         private readonly ICountryService _countryService;
         private readonly ILanguageService _languageService;
-        public ReactController(IPeopleService peopleService, ICityService citiesService, ICountryService countriesService)
+        public ReactController(IPeopleService peopleService, ICityService citiesService, ICountryService countriesService, ILanguageService languageService)
         {
             _peopleService = peopleService;
             _cityService = citiesService;
             _countryService = countriesService;
+            _languageService = languageService;
         }
 
         // GET: api/<ReactController>
@@ -33,6 +34,11 @@ namespace MVC_Data_Assignment.Controllers
             reactViewModel.PeopleList = _peopleService.All();
             reactViewModel.Languages = _languageService.All();
 
+            foreach (var item in reactViewModel.Languages)
+            {
+                item.Speakers = null;
+            }
+
             return reactViewModel;
         }
 
@@ -40,31 +46,67 @@ namespace MVC_Data_Assignment.Controllers
         [HttpGet("{id}")]
         public Person Get(int id)
         {
-            return _peopleService.FindBy(id);
+            Person person = _peopleService.FindBy(id);
+
+            if (person == null)
+            {
+                Response.StatusCode = 404;
+            }
+
+            foreach (var item in person.Languages)
+            {
+                item.Person = null;
+                item.Language.Speakers = null;
+            }
+
+            return person;
         }
 
         // POST api/<ReactController>
         [HttpPost]
-        public void Post([FromBody] CreatePersonViewModel person)
+        public IActionResult Post(CreatePersonViewModel newPerson)
         {
-            //ToDo - code 201 created / code 400 bad request(validation failed) / code 500 database failed to create person
-            _peopleService.Add(person);
+            if (ModelState.IsValid)
+            {
+                Person person = _peopleService.Add(newPerson);
+                return Created("Person added to database", person);
+            }
+
+            return BadRequest(newPerson);
+
         }
 
         //PUT api/<ReactController>/2
         [HttpPut("{id}")]//Edit person
-        public void Edit(int id, EditPersonViewModel person)
+        public IActionResult Edit(int id, [FromBody] EditPersonViewModel person)
         {
-            //ToDo - code 200 ok was edited / code 400 bad request(validation failed) / code 500 database failed to save edit of person
-            _peopleService.Edit(id, person);
+            
+            if (ModelState.IsValid)
+            {
+                Person editedPerson = _peopleService.Edit(id, person);
+
+                if (editedPerson == null)
+                {
+                    Response.StatusCode = 500;
+                }
+
+                return Ok(editedPerson);
+
+            }
+
+            return BadRequest(person);
         }
 
         // DELETE api/<ReactController>/3
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            //ToDo - code 200 was removed / code 404 not found / code 500 database failed to delete person
-            _peopleService.Remove(id);
+         
+            if (_peopleService.Remove(id))
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
     }
