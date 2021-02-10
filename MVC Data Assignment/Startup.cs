@@ -53,11 +53,11 @@ namespace MVC_Data_Assignment
                 options.AddPolicy(name: "MyAllowSpecificOrigins",
                  builder =>
                  {
-                     builder.WithOrigins("http://localhost:3000")//defualt uri for React (npm start)
-                                         .AllowAnyMethod()
-                                         .AllowAnyHeader();
+                     builder.WithOrigins("http://localhost:3000")
+                                         .AllowAnyMethod()// allows GET/POST/PUT/DELETE
+                                         .AllowAnyHeader();//allows all headers
                  });
-        });
+            });
 
             services.AddSwaggerGen();
         }
@@ -77,7 +77,6 @@ namespace MVC_Data_Assignment
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
@@ -88,6 +87,8 @@ namespace MVC_Data_Assignment
             });
 
             app.UseRouting();
+
+            app.UseCors("MyAllowSpecificOrigins");
 
             app.UseAuthentication(); //login
             app.UseAuthorization(); //role

@@ -34,6 +34,21 @@ namespace MVC_Data_Assignment.Controllers
             reactViewModel.PeopleList = _peopleService.All();
             reactViewModel.Languages = _languageService.All();
 
+            foreach (var person in reactViewModel.PeopleList)
+            {
+                person.City.CityPeopleList = null;
+                person.City.Country = null;
+
+                if (person.Languages != null)
+                {
+                    foreach (var language in person.Languages)
+                    {
+                        language.Person.City.CityPeopleList = null;
+                    }
+                }
+
+            }
+
             foreach (var item in reactViewModel.Languages)
             {
                 item.Speakers = null;
@@ -48,18 +63,21 @@ namespace MVC_Data_Assignment.Controllers
         {
             Person person = _peopleService.FindBy(id);
 
-            if (person == null)
+            if (person != null)
             {
-                Response.StatusCode = 404;
+                person.City.CityPeopleList = null;
+                person.City.Country = null;
+
+                foreach (var item in person.Languages)
+                {
+                    item.Person = null;
+                    item.Language.Speakers = null;
+                }
+
+                return person;
             }
 
-            foreach (var item in person.Languages)
-            {
-                item.Person = null;
-                item.Language.Speakers = null;
-            }
-
-            return person;
+            return null;
         }
 
         // POST api/<ReactController>
@@ -80,7 +98,7 @@ namespace MVC_Data_Assignment.Controllers
         [HttpPut("{id}")]//Edit person
         public IActionResult Edit(int id, [FromBody] EditPersonViewModel person)
         {
-            
+
             if (ModelState.IsValid)
             {
                 Person editedPerson = _peopleService.Edit(id, person);
@@ -101,7 +119,7 @@ namespace MVC_Data_Assignment.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-         
+
             if (_peopleService.Remove(id))
             {
                 return Ok();
