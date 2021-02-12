@@ -20,7 +20,20 @@ namespace MVC_Data_Assignment.Models.Services
 
         public Person Add(CreatePersonViewModel createPersonViewModel)
         {
-            return _peopleRepo.Create(createPersonViewModel.Name, createPersonViewModel.PhoneNum, createPersonViewModel.City);
+            Person person = new Person(createPersonViewModel.Name, createPersonViewModel.PhoneNum);
+            
+            if (createPersonViewModel.City != null)
+            {
+                person.City = createPersonViewModel.City;
+            }
+            if (createPersonViewModel.LanguageId > 0)
+            {
+                createPersonViewModel.PersonLanguage.Language = _languageRepo.Read(createPersonViewModel.LanguageId);
+                person.Languages.Add(createPersonViewModel.PersonLanguage);
+            }
+                _peopleRepo.Create(person);
+                return person;
+           
         }
 
         public List<Person> All()
@@ -28,23 +41,23 @@ namespace MVC_Data_Assignment.Models.Services
             return _peopleRepo.Read();
         }
 
-        public Person Edit(int id, EditPersonViewModel person)
+        public Person Edit(int id, EditPersonViewModel editedPerson)
         {
-            Person editedPerson = FindBy(id);
+            Person person = FindBy(id);
 
-            editedPerson.Name = person.Name;
-            editedPerson.PhoneNum = person.PhoneNum;
-            if (person.City != null)
+            person.Name = editedPerson.Name;
+            person.PhoneNum = editedPerson.PhoneNum;
+            if (editedPerson.City != null)
             {
-                editedPerson.City = person.City;
+                person.City = editedPerson.City;
             }
-            if (person.PersonLanguage != null)
+            if (editedPerson.PersonLanguage != null)
             {
-                person.PersonLanguage.Language = _languageRepo.Read(person.PersonLanguage.Language.Id);
-                editedPerson.Languages.Add(person.PersonLanguage);
+                editedPerson.PersonLanguage.Language = _languageRepo.Read(editedPerson.PersonLanguage.Language.Id);
+                person.Languages.Add(editedPerson.PersonLanguage);
             }
 
-            return _peopleRepo.Update(editedPerson);
+            return _peopleRepo.Update(person);
         }
 
         public Person FindBy(int id)

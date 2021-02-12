@@ -33,6 +33,13 @@ namespace MVC_Data_Assignment.Controllers
 
             reactViewModel.PeopleList = _peopleService.All();
             reactViewModel.Languages = _languageService.All();
+            reactViewModel.Cities = _cityService.All();
+
+            foreach (var city in reactViewModel.Cities)
+            {
+                city.CityPeopleList = null;
+                city.Country.CitiesList = null;
+            }
 
             foreach (var person in reactViewModel.PeopleList)
             {
@@ -66,7 +73,7 @@ namespace MVC_Data_Assignment.Controllers
             if (person != null)
             {
                 person.City.CityPeopleList = null;
-                person.City.Country = null;
+                person.City.Country.CitiesList = null ;
 
                 foreach (var item in person.Languages)
                 {
@@ -122,9 +129,9 @@ namespace MVC_Data_Assignment.Controllers
 
             if (_peopleService.Remove(id))
             {
-                return Ok();
+                return Ok(true);
             }
-            return BadRequest();
+            return BadRequest(false);
         }
 
     }

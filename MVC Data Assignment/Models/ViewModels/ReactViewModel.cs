@@ -9,6 +9,7 @@ namespace MVC_Data_Assignment.Models.ViewModels
     {
         public IEnumerable<Person> PeopleList { get; set; }
         public IEnumerable<Language> Languages { get; set; }
+        public IEnumerable<City> Cities { get; set; }
 
 
     }

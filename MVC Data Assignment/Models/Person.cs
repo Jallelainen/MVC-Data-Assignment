@@ -35,11 +35,11 @@ namespace MVC_Data_Assignment.Models
         {
             Languages = languages;
         }
+
         public Person(int id, string name, string phoneNum) : this (name, phoneNum)
         {
             Id = id;
         }
-
         public Person (int id, string name, string phoneNum, City city) : this (name, phoneNum, city) 
         {
             Id = id;

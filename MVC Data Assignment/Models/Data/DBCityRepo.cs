@@ -60,7 +60,7 @@ namespace MVC_Data_Assignment.Models.Data
 
         public List<City> Read()
         {
-            return _peopleDbContext.CityList.ToList();
+            return _peopleDbContext.CityList.Include(c => c.Country).ToList();
         }
 
         public City Update(City city)

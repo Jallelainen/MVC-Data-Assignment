@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Data_Assignment.Models.Data
 {
-    public class InMemoryPeopleRepo : IPeopleRepo
+    public class InMemoryPeopleRepo 
     {
         private static List<Person> peopleList = new List<Person>();
         private static int idCounter = 0;

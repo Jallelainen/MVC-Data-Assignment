@@ -16,12 +16,9 @@ namespace MVC_Data_Assignment.Models.Data
             _peopleDbContext = peopleDbContext;
         }
 
-        public Person Create(string name, string phoneNum, City city)
+        public Person Create(Person person)
         {
-            if (city != null)
-            {
 
-                Person person = new Person(name, phoneNum, city);
 
                 _peopleDbContext.PeopleList.Add(person);
 
@@ -33,22 +30,6 @@ namespace MVC_Data_Assignment.Models.Data
                 {
                     return null;
                 }
-            }
-            else
-            {
-                Person person = new Person(name, phoneNum);
-
-                _peopleDbContext.PeopleList.Add(person);
-
-                if (_peopleDbContext.SaveChanges() != 0)
-                {
-                    return person;
-                }
-                else
-                {
-                    return null;
-                }
-            }
 
         }
 
@@ -83,7 +64,7 @@ namespace MVC_Data_Assignment.Models.Data
 
         public Person Read(int id)
         {
-            return _peopleDbContext.PeopleList.Include(p => p.City).Include(p => p.Languages).ThenInclude(p => p.Language).SingleOrDefault(personList => personList.Id == id);
+            return _peopleDbContext.PeopleList.Include(p => p.City).ThenInclude(p => p.Country).Include(p => p.Languages).ThenInclude(p => p.Language).SingleOrDefault(personList => personList.Id == id);
         }
 
         public Person Update(Person person)
