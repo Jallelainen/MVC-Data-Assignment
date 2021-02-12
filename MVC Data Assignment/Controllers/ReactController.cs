@@ -73,7 +73,7 @@ namespace MVC_Data_Assignment.Controllers
             if (person != null)
             {
                 person.City.CityPeopleList = null;
-                person.City.Country.CitiesList = null ;
+                person.City.Country.CitiesList = null;
 
                 foreach (var item in person.Languages)
                 {
@@ -89,16 +89,26 @@ namespace MVC_Data_Assignment.Controllers
 
         // POST api/<ReactController>
         [HttpPost]
-        public IActionResult Post(CreatePersonViewModel newPerson)
+        public IActionResult Post(CreateReactViewModel createReactPerson)
         {
-            if (ModelState.IsValid)
+            CreatePersonViewModel newPerson = new CreatePersonViewModel()
             {
-                Person person = _peopleService.Add(newPerson);
+                Name = createReactPerson.Name,
+                PhoneNum = "123456789",
+                City = _cityService.FindBy(createReactPerson.CityId),
+                PersonLanguage = new PersonLanguage(),
+            };
+
+            newPerson.PersonLanguage.Language = _languageService.FindBy(createReactPerson.LanguageId);
+            Person person = _peopleService.Add(newPerson);
+            if (person != null)
+            {
                 return Created("Person added to database", person);
             }
-
-            return BadRequest(newPerson);
-
+            else
+            {
+                return BadRequest(newPerson);
+            }
         }
 
         //PUT api/<ReactController>/2

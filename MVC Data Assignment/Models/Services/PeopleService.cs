@@ -26,9 +26,9 @@ namespace MVC_Data_Assignment.Models.Services
             {
                 person.City = createPersonViewModel.City;
             }
-            if (createPersonViewModel.LanguageId > 0)
+            if (createPersonViewModel.PersonLanguage != null)
             {
-                createPersonViewModel.PersonLanguage.Language = _languageRepo.Read(createPersonViewModel.LanguageId);
+                person.Languages = new List<PersonLanguage>();
                 person.Languages.Add(createPersonViewModel.PersonLanguage);
             }
                 _peopleRepo.Create(person);
