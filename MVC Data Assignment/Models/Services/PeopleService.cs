@@ -67,15 +67,15 @@ namespace MVC_Data_Assignment.Models.Services
 
         public bool Remove(int id)
         {
-            Person people = _peopleRepo.Read(id);
+            Person person = _peopleRepo.Read(id);
 
-            if (people == null)
+            if (person == null)
             {
                 return false;
             }
             else
             {
-                return _peopleRepo.Delete(people);
+                return _peopleRepo.Delete(person);
             }
 
         }

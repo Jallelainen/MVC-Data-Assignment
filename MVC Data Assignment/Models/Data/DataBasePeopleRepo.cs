@@ -39,7 +39,7 @@ namespace MVC_Data_Assignment.Models.Data
             {
                 _peopleDbContext.PeopleList.Remove(person);
 
-                if (_peopleDbContext.SaveChanges() != 0) // if previous line failed, no change was made
+                if (_peopleDbContext.SaveChanges() != 0) // if this failed, no changes was made
                 {
                     return true;
 

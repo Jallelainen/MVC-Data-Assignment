@@ -137,11 +137,13 @@ namespace MVC_Data_Assignment.Controllers
         public IActionResult Delete(int id)
         {
 
-            if (_peopleService.Remove(id))
-            {
-                return Ok(true);
-            }
-            return BadRequest(false);
+                if (_peopleService.Remove(id))
+                {
+                    return Ok(true);
+                }
+
+                return BadRequest(false);
+       
         }
 
     }
